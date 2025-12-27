@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:shoppe/screens/common_widgets/onbarding/createaccount_screen.dart';
-import 'package:shoppe/screens/common_widgets/onbarding/splash_screen.dart';
-import 'package:shoppe/screens/common_widgets/onbarding/start.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoppe/screens/onbarding/createaccount_screen.dart';
+import 'package:shoppe/screens/onbarding/forgetpassword_screen.dart';
+import 'package:shoppe/screens/onbarding/login_screen.dart';
+import 'package:shoppe/screens/onbarding/password_screen.dart';
+import 'package:shoppe/screens/onbarding/recover_password.dart';
+import 'package:shoppe/screens/onbarding/resetpassword_screen.dart';
+import 'package:shoppe/screens/onbarding/splash_screen.dart';
+import 'package:shoppe/screens/onbarding/start.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ScreenUtilInit(
+      designSize: const Size(440, 956),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -34,13 +46,18 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-       initialRoute: '/',
+      initialRoute: '/',
       routes: {
-        '/': (context)=> const SplashScreen(),
-        '/start': (context)=> const Start(),
+        '/': (context) => const SplashScreen(),
+        '/start': (context) => const Start(),
         '/createaccount': (context) => const CreateaccountScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/password': (context) => const PasswordScreen(),
+        '/forgetpassword': (context) => const ForgetpasswordScreen(),
+        '/recoverpassword': (context) => const RecoverPassword(),
+        '/resetpassword': (context) => const ResetpasswordScreen(),
       },
-     // home: const SplashScreen(),
+      // home: const SplashScreen(),
     );
   }
 }
