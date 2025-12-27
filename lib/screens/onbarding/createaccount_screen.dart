@@ -21,29 +21,34 @@ class _CreateaccountScreenState extends State<CreateaccountScreen> {
       backgroundColor: Color(0xFFFFFFFF),
       body: Stack(
         children: [
-      //      Positioned(
-      // top: -50, 
-      // right: 150, 
-      // child: 
-      //     CircleAvatar(
-      //           radius: 130,
-      //             backgroundColor: Color(0xFF004CFF),
-      //       ),
-      //      ),
+  
            Positioned(
- top: 0, 
+ top: -150, 
       right: 0, 
-     left: 0,
+     left:-150,
     child: ClipPath(
       clipper: WaveClipperTwo(),
      
     child: 
-     Container(
-      height: 200,
-      color: Color(0xFFF2F5FE),
+     CircleAvatar(
+      radius: 200,
+     backgroundColor: Color(0xFFD9E4FF),
     ),)
   
 ),
+
+         Positioned(
+      top: 160, 
+     left: 230, 
+    //  child:  ClipPath(
+      //clipper: WaveClipperOne(),
+      child: 
+          CircleAvatar(
+                radius: 100,
+                  backgroundColor: Color(0xFF004CFF),
+            ),
+           ),
+           //),
 
             Padding(padding: EdgeInsets.all(16),
       child:

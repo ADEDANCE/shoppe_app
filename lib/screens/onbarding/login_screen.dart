@@ -11,89 +11,94 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
- // final TextEditingController _emailcontroller =TextEditingController();
-   final TextEditingController _emailcontroller =TextEditingController();
+  // final TextEditingController _emailcontroller =TextEditingController();
+  final TextEditingController _emailcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-         backgroundColor: Color(0xFFFFFFFF),
+    return Scaffold(
+      backgroundColor: Color(0xFFFFFFFF),
       body: Column(
         children: [
-          Expanded(child: 
-         Stack(
-           children: [
-               Positioned(
- top: 0, 
-      right: 0, 
-     left: 0,
-    child: ClipPath(
-      clipper: WaveClipperTwo(),
-     
-    child: 
-     Container(
-      height: 200,
-      color: Color(0xFFF2F5FE),
-    ),)
-),
+          Expanded(
+            child: Stack(
+              children: [
+                Positioned(
+                  top: -100,
+                  right: 70,
+                  left: -150,
+                  child: ClipPath(
+                    clipper: WaveClipperTwo(),
 
-                     Positioned(
-      top: -10, 
-     // right: 180, 
-      left: -90,
-      child: 
-          CircleAvatar(
-                radius: 130,
-                  backgroundColor: Color(0xFF004CFF),
-            ),
-           ),
-           ],
-         ),),
-                  
-//         Spacer(),
-          Padding(padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-             
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text('Login', style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 52,
-                  fontWeight: FontWeight.bold,
-                ),),
-              ),
-              //SizedBox(height: ,),
-                            Align(
-                alignment: Alignment.centerLeft,
-                child: Row(
-                  children: [
-                    Text('Good to see you back!', style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 19,
-                  fontWeight: FontWeight.bold,
-                ),),
-                  ],
-                )
+                    child: CircleAvatar(
+                      radius: 200,
+                      backgroundColor: Color(0xFFD9E4FF),
+                    ),
+                  ),
+                ),
 
-                 
-              ),
-              SizedBox(height: 20,),
-              Textfield(controller: _emailcontroller, hintText: "Email",  ),
-    
-               SizedBox(height: 30,),
-               ButtonWidget(text: 'Next', onPressed: (){
-              Navigator.popAndPushNamed(context, '/password');
-            }),
-            Text('Cancel',
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.normal,
+                Positioned(
+                  top: -40,
+                  // right: 180,
+                  left: -90,
+                  child: CircleAvatar(
+                    radius: 140,
+                    backgroundColor: Color(0xFF004CFF),
+                  ),
+                ),
+              ],
             ),
-            ),
-            SizedBox(height: 20,),
-            
-            ],
           ),
+
+          //         Spacer(),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Login',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 52,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                //SizedBox(height: ,),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    children: [
+                      Text(
+                        'Good to see you back!',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20),
+                Textfield(controller: _emailcontroller, hintText: "Email"),
+
+                SizedBox(height: 30),
+                ButtonWidget(
+                  text: 'Next',
+                  color: Color(0xFF004CFF),
+                  onPressed: () {
+                    Navigator.popAndPushNamed(context, '/password');
+                  },
+                ),
+                Text(
+                  'Cancel',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal),
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
           ),
         ],
       ),
