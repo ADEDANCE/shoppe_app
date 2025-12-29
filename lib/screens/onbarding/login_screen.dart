@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/textfield.dart';
+import 'package:shoppe/screens/home/home_nav.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -89,13 +90,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   text: 'Next',
                   color: Color(0xFF004CFF),
                   onPressed: () {
-                    Navigator.popAndPushNamed(context, '/password');
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => const HomeNav()),
+                    );
                   },
                 ),
-                Text(
-                  'Cancel',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal),
+                GestureDetector(
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.popAndPushNamed(
+                      context,
+                      '/bottomnav',
+                      //   '/password'
+                    );
+                  },
                 ),
+
                 SizedBox(height: 20),
               ],
             ),
