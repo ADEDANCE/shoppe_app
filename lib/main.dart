@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoppe/screens/home/home_nav.dart';
+import 'package:shoppe/screens/home/home_nav.dart';
+import 'package:shoppe/screens/home/home_screen.dart';
 import 'package:shoppe/screens/onbarding/createaccount_screen.dart';
 import 'package:shoppe/screens/onbarding/forgetpassword_screen.dart';
 import 'package:shoppe/screens/onbarding/login_screen.dart';
@@ -56,6 +59,8 @@ class MyApp extends StatelessWidget {
         '/forgetpassword': (context) => const ForgetpasswordScreen(),
         '/recoverpassword': (context) => const RecoverPassword(),
         '/resetpassword': (context) => const ResetpasswordScreen(),
+        '/home': (context) => const HomeScreen(),
+        '/bottomnav': (context) => const HomeNav(),
       },
       // home: const SplashScreen(),
     );
