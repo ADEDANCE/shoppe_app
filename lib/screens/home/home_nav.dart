@@ -15,9 +15,9 @@ class _HomeNavState extends State<HomeNav> {
   int _currentIndex = 0;
   final List<Widget> _pages = const [
     HomeScreen(),
-    ProfileScreen(),
-    CartScreen(),
     WishlistScreen(),
+    CartScreen(),
+    ProfileScreen(),
   ];
 
   @override
@@ -35,15 +35,53 @@ class _HomeNavState extends State<HomeNav> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.blue,
         unselectedItemColor: Colors.grey,
-
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
+            icon: Column(
+              children: [
+                Icon(Icons.home),
+                _currentIndex == 0
+                    ? Container(width: 20, height: 2, color: Colors.blue)
+                    : SizedBox.shrink(),
+              ],
+            ),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Column(
+              children: [
+                Icon(Icons.favorite_outline),
+                _currentIndex == 1
+                    ? Container(width: 20, height: 2, color: Colors.blue)
+                    : SizedBox.shrink(),
+              ],
+            ),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Column(
+              children: [
+                Icon(Icons.shopping_cart),
+                _currentIndex == 2
+                    ? Container(width: 20, height: 2, color: Colors.blue)
+                    : SizedBox.shrink(),
+              ],
+            ),
             label: 'Cart',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+          BottomNavigationBarItem(
+            icon: Column(
+              children: [
+                Icon(Icons.person),
+                _currentIndex == 3
+                    ? Container(width: 20, height: 2, color: Colors.blue)
+                    : SizedBox.shrink(),
+              ],
+            ),
+            label: 'Profile',
+          ),
         ],
       ),
     );
