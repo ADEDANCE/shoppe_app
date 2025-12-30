@@ -37,6 +37,7 @@ dependencies:
   flutter_screenutil: ^5.8.4
   flutter_custom_clippers: ^2.1.0
   flutter_intl_phone_field: ^0.0.7
+  carousel_slider: ^5.1.1
 
 dev_dependencies:
   flutter_test:
