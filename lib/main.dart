@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
         '/recoverpassword': (context) => const RecoverPassword(),
         '/resetpassword': (context) => const ResetpasswordScreen(),
         '/home': (context) => const HomeScreen(),
-        '/bottomnav': (context) => const HomeNav(),
+        '/homenav': (context) => const HomeNav(),
       },
       // home: const SplashScreen(),
     );
