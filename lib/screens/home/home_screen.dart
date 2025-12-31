@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/carousel_card.dart';
+import 'package:shoppe/screens/common_widgets/categories_card.dart';
+import 'package:shoppe/screens/common_widgets/product_circle.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -115,73 +117,268 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }),
               ),
-              Center(
-                child: Text(
-                  'Home Content Here',
-                  style: TextStyle(fontSize: 22),
-                ),
-              ),
 
               SizedBox(height: 50),
-              SizedBox(
-                width: 200,
-                child: InkWell(
-                  onTap: () {
-                    //debugPrint('Card tapped');
-                  },
-                  child: Card(
-                    elevation: 4,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          GridView.count(
-                            crossAxisCount: 2,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            mainAxisSpacing: 6,
-                            crossAxisSpacing: 6,
-                            children: [
-                              Image.asset('assets/images/carouselimg6.png'),
-                              Image.asset('assets/images/carouselimg6.png'),
-                              Image.asset('assets/images/carouselimg6.png'),
-                              Image.asset('assets/images/carouselimg6.png'),
-                              // _imageItem(),
-                              // _imageItem(),
-                              // _imageItem(),
-                              // _imageItem(),
-                            ],
-                          ),
-                          SizedBox(height: 12),
-
-                          // 🔹 TEXT ROW
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
-                                'Summer',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Text(
-                                '12 items',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Categories',
+                    style: TextStyle(
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF000000),
                     ),
                   ),
+                  Row(
+                    children: [
+                      Text(
+                        'See All',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF000000),
+                        ),
+                      ),
+                      SizedBox(width: 20.w),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Image.asset(
+                          'assets/images/bluenav-btn.png',
+                          width: 30.w,
+                          height: 30.h,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 10.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CategoriesCard(
+                    images: [
+                      'assets/images/Clothinggrid1.png',
+                      'assets/images/Clothinggrid2.png',
+                      'assets/images/Clothinggrid3.png',
+                      'assets/images/Clothinggrid4.png',
+                    ],
+                    category: 'Clothing',
+                    productnum: '109',
+                    onTap: () {},
+                  ),
+                  CategoriesCard(
+                    images: [
+                      'assets/images/Clothinggrid1.png',
+                      'assets/images/Clothinggrid2.png',
+                      'assets/images/Clothinggrid3.png',
+                      'assets/images/Clothinggrid4.png',
+                    ],
+                    category: 'Shoes',
+                    productnum: '530',
+                    onTap: () {},
+                  ),
+                ],
+              ),
+              SizedBox(height: 10.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CategoriesCard(
+                    images: [
+                      'assets/images/Clothinggrid1.png',
+                      'assets/images/Clothinggrid2.png',
+                      'assets/images/Clothinggrid3.png',
+                      'assets/images/Clothinggrid4.png',
+                    ],
+                    category: 'Bags',
+                    productnum: '87',
+                    onTap: () {},
+                  ),
+                  CategoriesCard(
+                    images: [
+                      'assets/images/Clothinggrid1.png',
+                      'assets/images/Clothinggrid2.png',
+                      'assets/images/Clothinggrid3.png',
+                      'assets/images/Clothinggrid4.png',
+                    ],
+                    category: 'Lingerie',
+                    productnum: '218',
+                    onTap: () {},
+                  ),
+                ],
+              ),
+              SizedBox(height: 10.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CategoriesCard(
+                    images: [
+                      'assets/images/Clothinggrid1.png',
+                      'assets/images/Clothinggrid2.png',
+                      'assets/images/Clothinggrid3.png',
+                      'assets/images/Clothinggrid4.png',
+                    ],
+                    category: 'Watch',
+                    productnum: '109',
+                    onTap: () {},
+                  ),
+                  CategoriesCard(
+                    images: [
+                      'assets/images/Clothinggrid1.png',
+                      'assets/images/Clothinggrid2.png',
+                      'assets/images/Clothinggrid3.png',
+                      'assets/images/Clothinggrid4.png',
+                    ],
+                    category: 'Hoodies',
+                    productnum: '219',
+                    onTap: () {},
+                  ),
+                ],
+              ),
+              SizedBox(height: 30.h),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Top Products',
+                  style: TextStyle(
+                    fontSize: 21,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF000000),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ProductCircle(
+                    onTap: () {},
+                    imagepath: 'assets/images/Clothinggrid1.png',
+                  ),
+                  ProductCircle(
+                    onTap: () {},
+                    imagepath: 'assets/images/Clothinggrid1.png',
+                  ),
+                  ProductCircle(
+                    onTap: () {},
+                    imagepath: 'assets/images/Clothinggrid1.png',
+                  ),
+                  ProductCircle(
+                    onTap: () {},
+                    imagepath: 'assets/images/Clothinggrid1.png',
+                  ),
+                  ProductCircle(
+                    onTap: () {},
+                    imagepath: 'assets/images/Clothinggrid1.png',
+                  ),
+                ],
+              ),
+              SizedBox(height: 30.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'New Items',
+                    style: TextStyle(
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF000000),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'See All',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF000000),
+                        ),
+                      ),
+                      SizedBox(width: 20.w),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Image.asset(
+                          'assets/images/bluenav-btn.png',
+                          width: 30.w,
+                          height: 30.h,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 30.h),
+              InkWell(
+                onTap: () {},
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: 170,
+                      child: Card(
+                        elevation: 4,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: 8,
+                            left: 5,
+                            right: 5,
+                            top: 4,
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ClipRRect(
+                                borderRadius: const BorderRadius.vertical(
+                                  top: Radius.circular(12),
+                                ),
+                                child: Image.asset(
+                                  'assets/images/Clothinggrid1.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              SizedBox(height: 5.h),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '1780',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xFF000000),
+                                        ),
+                                      ),
+                                      SizedBox(width: 3),
+                                      Icon(
+                                        Icons.favorite,
+                                        color: Color(0xFF0042E0),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    'New',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.normal,
+                                      color: Color(0xFF000000),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
