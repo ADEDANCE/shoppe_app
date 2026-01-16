@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/carousel_card.dart';
 import 'package:shoppe/screens/common_widgets/categories_card.dart';
+import 'package:shoppe/screens/common_widgets/producr_card.dart';
 import 'package:shoppe/screens/common_widgets/product_circle.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -71,6 +72,32 @@ class _HomeScreenState extends State<HomeScreen> {
       circlecolor2: Color(0xFFFFD471),
     ),
   ];
+
+  final List<Widget> newitems = [
+    ProducrCard(
+      width: 150,
+      onTap: () {},
+      imagepath: 'assets/images/Clothinggrid1.png',
+      description: 'Red T-Shirt',
+      price: '17,00',
+    ),
+    ProducrCard(
+      width: 150,
+      onTap: () {},
+      imagepath: 'assets/images/Clothinggrid2.png',
+      description: 'Blue Jeans',
+      price: '25,000',
+    ),
+    ProducrCard(
+      width: 150,
+      onTap: () {},
+      imagepath: 'assets/images/Clothinggrid3.png',
+
+      description: 'Sneakers',
+      price: '30,000',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -311,75 +338,101 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SizedBox(height: 30.h),
-              InkWell(
-                onTap: () {},
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: 170,
-                      child: Card(
-                        elevation: 4,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            bottom: 8,
-                            left: 5,
-                            right: 5,
-                            top: 4,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ClipRRect(
-                                borderRadius: const BorderRadius.vertical(
-                                  top: Radius.circular(12),
-                                ),
-                                child: Image.asset(
-                                  'assets/images/Clothinggrid1.png',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              SizedBox(height: 5.h),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        '1780',
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xFF000000),
-                                        ),
-                                      ),
-                                      SizedBox(width: 3),
-                                      Icon(
-                                        Icons.favorite,
-                                        color: Color(0xFF0042E0),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    'New',
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.normal,
-                                      color: Color(0xFF000000),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+
+              SizedBox(
+                height: 200, // REQUIRED for horizontal scroll
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: newitems.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 14),
+                      child: newitems[index],
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 30.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Flash Sale',
+                    style: TextStyle(
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF000000),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'See All',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF000000),
                         ),
                       ),
-                    ),
-                  ],
-                ),
+                      SizedBox(width: 20.w),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Image.asset(
+                          'assets/images/bluenav-btn.png',
+                          width: 30.w,
+                          height: 30.h,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 10.h),
+              Row(
+                children: [
+                  ProducrCard(
+                    width: 100,
+                    onTap: () {},
+                    imagepath: 'assets/images/Clothinggrid2.png',
+                  ),
+                  SizedBox(width: 15.w),
+                  ProducrCard(
+                    width: 100,
+                    onTap: () {},
+                    imagepath: 'assets/images/Clothinggrid1.png',
+                  ),
+                  SizedBox(width: 15.w),
+                  ProducrCard(
+                    width: 100,
+                    onTap: () {},
+                    imagepath: 'assets/images/Clothinggrid4.png',
+                  ),
+                  SizedBox(width: 15.w),
+                ],
+              ),
+              SizedBox(height: 30.h),
+              Row(
+                children: [
+                  ProducrCard(
+                    width: 100,
+                    onTap: () {},
+                    imagepath: 'assets/images/Clothinggrid1.png',
+                  ),
+                  SizedBox(width: 15.w),
+                  ProducrCard(
+                    width: 100,
+                    onTap: () {},
+                    imagepath: 'assets/images/Clothinggrid4.png',
+                  ),
+                  SizedBox(width: 15.w),
+                  ProducrCard(
+                    width: 100,
+                    onTap: () {},
+                    imagepath: 'assets/images/Clothinggrid3.png',
+                  ),
+                  SizedBox(width: 15.w),
+                ],
               ),
             ],
           ),

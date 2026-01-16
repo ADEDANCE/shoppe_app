@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/home/home_nav.dart';
-import 'package:shoppe/screens/home/home_nav.dart';
 import 'package:shoppe/screens/home/home_screen.dart';
 import 'package:shoppe/screens/onbarding/createaccount_screen.dart';
 import 'package:shoppe/screens/onbarding/forgetpassword_screen.dart';
