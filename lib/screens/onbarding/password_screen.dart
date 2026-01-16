@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/password_box.dart';
+import 'package:shoppe/screens/home/home_nav.dart';
 
 class PasswordScreen extends StatefulWidget {
   const PasswordScreen({super.key});
@@ -64,8 +65,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 ),
                 Positioned(
                   top: 200,
-
-                  right: 110,
+                  right: 140,
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 40,
@@ -75,7 +75,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 Positioned(
                   top: 290,
 
-                  right: 60,
+                  right: 80,
                   child: Text(
                     "Hello, Romina!!",
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
@@ -84,7 +84,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 Positioned(
                   top: 340,
 
-                  right: 60,
+                  right: 90,
                   child: Text(
                     "Type your password",
                     style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
@@ -99,35 +99,58 @@ class _PasswordScreenState extends State<PasswordScreen> {
               ],
             ),
           ),
-          PasswordBox(
-            controllers: passwordControllers,
-            focusNodes: passwordfocuNode,
-          ),
-          SizedBox(height: 300.h),
-          //Spacer(),
-          Center(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
               children: [
-                Text(
-                  "Type your password",
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                PasswordBox(
+                  controllers: passwordControllers,
+                  focusNodes: passwordfocuNode,
                 ),
-                SizedBox(width: 10),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.popAndPushNamed(context, '/forgetpassword');
+                SizedBox(height: 150.h),
+
+                ButtonWidget(
+                  text: 'Next',
+                  color: Color(0xFF004CFF),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (_) => HomeNav()),
+                    );
                   },
-                  child: Image.asset(
-                    'assets/images/bluenav-btn.png',
-                    width: 30,
-                    height: 30,
+                ),
+
+                SizedBox(height: 50),
+                //Spacer(),
+                Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "Not you?",
+                        style: TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.popAndPushNamed(context, '/forgetpassword');
+                        },
+                        child: Image.asset(
+                          'assets/images/bluenav-btn.png',
+                          width: 30,
+                          height: 30,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+                SizedBox(height: 30),
               ],
             ),
           ),
-          SizedBox(height: 30),
         ],
       ),
     );
