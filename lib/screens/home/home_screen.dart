@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 45.h),
 
       child: Expanded(
         child: SingleChildScrollView(
@@ -188,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     images: [
                       'assets/images/Clothinggrid1.png',
                       'assets/images/Clothinggrid2.png',
-                      'assets/images/Clothinggrid3.png',
+                      'assets/images/Clothing1.png',
                       'assets/images/Clothinggrid4.png',
                     ],
                     category: 'Clothing',
@@ -197,10 +197,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   CategoriesCard(
                     images: [
-                      'assets/images/Clothinggrid1.png',
-                      'assets/images/Clothinggrid2.png',
-                      'assets/images/Clothinggrid3.png',
-                      'assets/images/Clothinggrid4.png',
+                      'assets/images/shoes.png',
+                      'assets/images/Shoe2.png',
+                      'assets/images/Shoe3.png',
+                      'assets/images/Shoe4.png',
                     ],
                     category: 'Shoes',
                     productnum: '530',
@@ -214,10 +214,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   CategoriesCard(
                     images: [
-                      'assets/images/Clothinggrid1.png',
-                      'assets/images/Clothinggrid2.png',
-                      'assets/images/Clothinggrid3.png',
-                      'assets/images/Clothinggrid4.png',
+                      'assets/images/Bag1.png',
+                      'assets/images/Bag2.png',
+                      'assets/images/Bag3.png',
+                      'assets/images/Bag4.png',
                     ],
                     category: 'Bags',
                     productnum: '87',
@@ -225,10 +225,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   CategoriesCard(
                     images: [
-                      'assets/images/Clothinggrid1.png',
-                      'assets/images/Clothinggrid2.png',
-                      'assets/images/Clothinggrid3.png',
-                      'assets/images/Clothinggrid4.png',
+                      'assets/images/Lingerie1.png',
+                      'assets/images/Lingerie2.png',
+                      'assets/images/Lingerie3.png',
+                      'assets/images/Lingerie4.png',
                     ],
                     category: 'Lingerie',
                     productnum: '218',
@@ -242,10 +242,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   CategoriesCard(
                     images: [
-                      'assets/images/Clothinggrid1.png',
-                      'assets/images/Clothinggrid2.png',
-                      'assets/images/Clothinggrid3.png',
-                      'assets/images/Clothinggrid4.png',
+                      'assets/images/Watch1.png',
+                      'assets/images/Watch2.png',
+                      'assets/images/Watch3.png',
+                      'assets/images/Watch4.png',
                     ],
                     category: 'Watch',
                     productnum: '109',
@@ -253,10 +253,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   CategoriesCard(
                     images: [
-                      'assets/images/Clothinggrid1.png',
-                      'assets/images/Clothinggrid2.png',
-                      'assets/images/Clothinggrid3.png',
-                      'assets/images/Clothinggrid4.png',
+                      'assets/images/Hoodies1.png',
+                      'assets/images/Hoodies2.png',
+                      'assets/images/Hoodies3.png',
+                      'assets/images/Hoodies4.png',
                     ],
                     category: 'Hoodies',
                     productnum: '219',
