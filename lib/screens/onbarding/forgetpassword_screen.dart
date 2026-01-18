@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
-import 'package:shoppe/screens/common_widgets/circlecheckbox_widget.dart';
 
 enum Method { sms, email }
 
