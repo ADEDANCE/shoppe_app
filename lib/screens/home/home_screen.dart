@@ -1,10 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/carousel_card.dart';
 import 'package:shoppe/screens/common_widgets/categories_card.dart';
-import 'package:shoppe/screens/common_widgets/producr_card.dart';
+import 'package:shoppe/screens/common_widgets/product_card.dart';
 import 'package:shoppe/screens/common_widgets/product_circle.dart';
+import 'package:shoppe/screens/home/product_screen.dart';
+import 'package:shoppe/screens/mock_product.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -181,89 +184,75 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SizedBox(height: 10.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CategoriesCard(
-                    images: [
-                      'assets/images/Clothinggrid1.png',
-                      'assets/images/Clothinggrid2.png',
-                      'assets/images/Clothing1.png',
-                      'assets/images/Clothinggrid4.png',
-                    ],
-                    category: 'Clothing',
-                    productnum: '109',
-                    onTap: () {},
-                  ),
-                  CategoriesCard(
-                    images: [
-                      'assets/images/shoes.png',
-                      'assets/images/Shoe2.png',
-                      'assets/images/Shoe3.png',
-                      'assets/images/Shoe4.png',
-                    ],
-                    category: 'Shoes',
-                    productnum: '530',
-                    onTap: () {},
-                  ),
-                ],
+              Column(
+                children: List.generate((categories.length / 2).ceil(), (
+                  rowIndex,
+                ) {
+                  // Get the two categories for this row
+                  final firstIndex = rowIndex * 2;
+                  final secondIndex = firstIndex + 1;
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      bottom: 10,
+                    ), // space below each row
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // First card
+                        CategoriesCard(
+                          images:
+                              categories[firstIndex]["images"] as List<String>,
+
+                          category: categories[firstIndex]["name"] as String,
+                          productnum: categories[firstIndex]["Availablenumber"]
+                              .toString(),
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ProductScreen(
+                                  categoryId:
+                                      categories[firstIndex]["id"] as String,
+                                  categoryName:
+                                      categories[firstIndex]["name"] as String,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+
+                        // Second card (check if exists)
+                        if (secondIndex < categories.length)
+                          CategoriesCard(
+                            images:
+                                categories[secondIndex]["images"]
+                                    as List<String>,
+
+                            category: categories[secondIndex]["name"] as String,
+                            productnum:
+                                categories[secondIndex]["Availablenumber"]
+                                    .toString(),
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => ProductScreen(
+                                    categoryId:
+                                        categories[secondIndex]["id"] as String,
+                                    categoryName:
+                                        categories[secondIndex]["name"]
+                                            as String,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                      ],
+                    ),
+                  );
+                }),
               ),
-              SizedBox(height: 10.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CategoriesCard(
-                    images: [
-                      'assets/images/Bag1.png',
-                      'assets/images/Bag2.png',
-                      'assets/images/Bag3.png',
-                      'assets/images/Bag4.png',
-                    ],
-                    category: 'Bags',
-                    productnum: '87',
-                    onTap: () {},
-                  ),
-                  CategoriesCard(
-                    images: [
-                      'assets/images/Lingerie1.png',
-                      'assets/images/Lingerie2.png',
-                      'assets/images/Lingerie3.png',
-                      'assets/images/Lingerie4.png',
-                    ],
-                    category: 'Lingerie',
-                    productnum: '218',
-                    onTap: () {},
-                  ),
-                ],
-              ),
-              SizedBox(height: 10.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CategoriesCard(
-                    images: [
-                      'assets/images/Watch1.png',
-                      'assets/images/Watch2.png',
-                      'assets/images/Watch3.png',
-                      'assets/images/Watch4.png',
-                    ],
-                    category: 'Watch',
-                    productnum: '109',
-                    onTap: () {},
-                  ),
-                  CategoriesCard(
-                    images: [
-                      'assets/images/Hoodies1.png',
-                      'assets/images/Hoodies2.png',
-                      'assets/images/Hoodies3.png',
-                      'assets/images/Hoodies4.png',
-                    ],
-                    category: 'Hoodies',
-                    productnum: '219',
-                    onTap: () {},
-                  ),
-                ],
-              ),
+
               SizedBox(height: 30.h),
               Align(
                 alignment: Alignment.centerLeft,
