@@ -71,6 +71,8 @@ final products = [
   {
     "id": "1",
     "name": "Nike Air",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 120,
     "image": "assets/images/shoes.png",
     "categoryId": "shoes",
@@ -78,6 +80,8 @@ final products = [
   {
     "id": "2",
     "name": "Adidas Run",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 100,
     "image": "assets/images/Shoe2.png",
     "categoryId": "shoes",
@@ -85,6 +89,8 @@ final products = [
   {
     "id": "3",
     "name": "Nike Air",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 220,
     "image": "assets/images/Shoe3.png",
     "categoryId": "shoes",
@@ -92,6 +98,8 @@ final products = [
   {
     "id": "4",
     "name": "Nike Air",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 220,
     "image": "assets/images/Shoe4.png",
     "categoryId": "shoes",
@@ -99,6 +107,8 @@ final products = [
   {
     "id": "5",
     "name": "Leather Bag",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 80,
     "image": "assets/images/Bag1.png",
     "categoryId": "bags",
@@ -106,6 +116,8 @@ final products = [
   {
     "id": "6",
     "name": "Gucci Bag",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 180,
     "image": "assets/images/Bag2.png",
     "categoryId": "bags",
@@ -113,6 +125,8 @@ final products = [
   {
     "id": "7",
     "name": "Nike Air",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 220,
     "image": "assets/images/Watch3.png",
     "categoryId": "watch",
@@ -120,6 +134,8 @@ final products = [
   {
     "id": "8",
     "name": "Rolex",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 220,
     "image": "assets/images/Watch2.png",
     "categoryId": "watch",
@@ -127,6 +143,8 @@ final products = [
   {
     "id": "9",
     "name": "Sport",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 220,
     "image": "assets/images/Watch1.png",
     "categoryId": "watch",
@@ -134,6 +152,8 @@ final products = [
   {
     "id": "10",
     "name": "Rolex",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 220,
     "image": "assets/images/Clothinggrid2.png",
     "categoryId": "clothing",
@@ -141,6 +161,8 @@ final products = [
   {
     "id": "11",
     "name": "Rolex",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 20,
     "image": "assets/images/Clothinggrid3.png",
     "categoryId": "clothing",
@@ -148,6 +170,8 @@ final products = [
   {
     "id": "12",
     "name": "Rolex",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 220,
     "image": "assets/images/Clothinggrid4.png",
     "categoryId": "clothing",
@@ -155,6 +179,8 @@ final products = [
   {
     "id": "13",
     "name": "Rolex",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 120,
     "image": "assets/images/Lingerie2.png",
     "categoryId": "clothing",
@@ -162,20 +188,26 @@ final products = [
   {
     "id": "14",
     "name": "Rolex",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 120,
     "image": "assets/images/Lingerie3.png",
-    "categoryId": "Lingerie",
+    "categoryId": "Lingeries",
   },
   {
     "id": "15",
     "name": "Rolex",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 130,
     "image": "assets/images/Lingerie4.png",
-    "categoryId": "Lingerie",
+    "categoryId": "Lingeries",
   },
   {
     "id": "16",
     "name": "Nike Air",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 120,
     "image": "assets/images/Hoodies1.png",
     "categoryId": "hoodies",
@@ -183,6 +215,8 @@ final products = [
   {
     "id": "17",
     "name": "Adidas Run",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 100,
     "image": "assets/images/Hoodies2.png",
     "categoryId": "hoodies",
@@ -190,6 +224,8 @@ final products = [
   {
     "id": "18",
     "name": "Nike Air",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 220,
     "image": "assets/images/Hoodies3.png",
     "categoryId": "hoodies",
@@ -197,6 +233,8 @@ final products = [
   {
     "id": "19",
     "name": "Nike Air",
+    "description":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 220,
     "image": "assets/images/Hoodies4.png",
     "categoryId": "hoodies",
