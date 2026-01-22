@@ -207,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           productnum: categories[firstIndex]["Availablenumber"]
                               .toString(),
                           onTap: () {
-                            Navigator.pushReplacement(
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (_) => ProductScreen(
@@ -233,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 categories[secondIndex]["Availablenumber"]
                                     .toString(),
                             onTap: () {
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => ProductScreen(

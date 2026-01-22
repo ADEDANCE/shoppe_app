@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/product_card.dart';
+import 'package:shoppe/screens/home/product_details.dart';
 import 'package:shoppe/screens/mock_product.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -32,7 +34,7 @@ class ProductScreen extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {},
-                    child: Image.asset("assets/images/Clothinggrid1.png"),
+                    child: Image.asset("assets/images/FilterIcon.png"),
                   ),
                 ],
               ),
@@ -52,24 +54,48 @@ class ProductScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ProducrCard(
-                          width: 150,
-                          onTap: () {},
+                          width: 190.w,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ProductDetails(
+                                  product: categoryProducts[firstIndex],
+                                ),
+                              ),
+                            );
+                          },
                           imagepath: categoryProducts[firstIndex]["image"]
                               .toString(),
                           name: categoryProducts[firstIndex]["name"] as String,
+                          // description:
+                          //     categoryProducts[firstIndex]["description"]
+                          //         as String,
                           price: "\$${categoryProducts[firstIndex]["price"]}",
                         ),
                         // Second card (check if exists)
                         if (secondIndex < categoryProducts.length)
                           ProducrCard(
-                            width: 150,
-                            onTap: () {},
+                            width: 190.w,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => ProductDetails(
+                                    product: categoryProducts[secondIndex],
+                                  ),
+                                ),
+                              );
+                            },
                             imagepath: categoryProducts[secondIndex]["image"]
                                 .toString(),
 
                             name:
                                 categoryProducts[secondIndex]["name"] as String,
 
+                            // description:
+                            //     categoryProducts[secondIndex]["description"]
+                            //         as String,
                             price:
                                 "\$${categoryProducts[secondIndex]["price"]}",
                           ),
