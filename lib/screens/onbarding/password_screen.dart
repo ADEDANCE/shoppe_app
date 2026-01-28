@@ -115,7 +115,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   text: 'Next',
                   color: Color(0xFF004CFF),
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(builder: (_) => HomeNav()),
                     );
