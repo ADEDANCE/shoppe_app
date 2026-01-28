@@ -187,7 +187,7 @@ final products = [
   },
   {
     "id": "14",
-    "name": "Rolex",
+    "name": "Lingeries",
     "description":
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 120,
@@ -196,7 +196,7 @@ final products = [
   },
   {
     "id": "15",
-    "name": "Rolex",
+    "name": "Lingeries2",
     "description":
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam arcu mauris, scelerisque eu mauris id, pretium pulvinar sapien.",
     "price": 130,
