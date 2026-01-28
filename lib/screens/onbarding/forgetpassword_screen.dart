@@ -137,6 +137,8 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
             Padding(
               padding: EdgeInsets.all(16),
               child: ButtonWidget(
+                width: double.infinity,
+                height: 61,
                 text: 'Next',
                 color: Color(0xFF004CFF),
                 onPressed: () {

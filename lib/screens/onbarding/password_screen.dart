@@ -110,6 +110,8 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 SizedBox(height: 150.h),
 
                 ButtonWidget(
+                  width: double.infinity,
+                  height: 61,
                   text: 'Next',
                   color: Color(0xFF004CFF),
                   onPressed: () {

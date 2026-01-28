@@ -99,6 +99,8 @@ class _ResetpasswordScreenState extends State<ResetpasswordScreen> {
                   ),
                   SizedBox(height: 70.h),
                   ButtonWidget(
+                    width: double.infinity,
+                    height: 61,
                     text: 'Save',
                     color: Color(0xFF004CFF),
                     onPressed: () {

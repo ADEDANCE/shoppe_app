@@ -88,6 +88,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 SizedBox(height: 30),
                 ButtonWidget(
+                  width: double.infinity,
+                  height: 61,
                   text: 'Next',
                   color: Color(0xFF004CFF),
                   onPressed: () {

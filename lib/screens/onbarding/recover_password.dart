@@ -111,6 +111,8 @@ class _RecoverPasswordState extends State<RecoverPassword> {
             Padding(
               padding: EdgeInsets.all(16),
               child: ButtonWidget(
+                width: double.infinity,
+                height: 61,
                 text: 'Send Again',
                 color: Color(0xFFFF5790),
                 onPressed: () {

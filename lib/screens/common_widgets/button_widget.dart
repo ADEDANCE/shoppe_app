@@ -4,11 +4,15 @@ class ButtonWidget extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final Color color;
+  final double width;
+  final double height;
   const ButtonWidget({
     super.key,
     required this.text,
     required this.onPressed,
     required this.color,
+    required this.height,
+    required this.width,
   });
 
   @override
@@ -17,7 +21,7 @@ class ButtonWidget extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
-        minimumSize: Size(double.infinity, 61),
+        minimumSize: Size(width, height),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       child: Text(
