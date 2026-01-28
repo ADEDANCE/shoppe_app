@@ -7,6 +7,7 @@ import 'package:shoppe/screens/common_widgets/categories_card.dart';
 import 'package:shoppe/screens/common_widgets/product_card.dart';
 import 'package:shoppe/screens/common_widgets/product_circle.dart';
 import 'package:shoppe/screens/home/product_screen.dart';
+import 'package:shoppe/screens/home/search_screen.dart';
 import 'package:shoppe/screens/mock_product.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -110,6 +111,46 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    ' Shop',
+                    style: TextStyle(
+                      fontSize: 30.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF000000),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const SearchScreen()),
+                      );
+                    },
+                    child: Container(
+                      width: 300.w,
+                      height: 30,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        children: const [
+                          Icon(Icons.search, color: Colors.grey),
+                          SizedBox(width: 10),
+                          Text(
+                            "Search products",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               //  CAROUSEL
               CarouselSlider(
                 items: slides,
@@ -385,19 +426,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {},
                     imagepath: 'assets/images/Clothinggrid2.png',
                   ),
-                  SizedBox(width: 15.w),
+                  SizedBox(width: 10.w),
                   ProducrCard(
                     width: 100,
                     onTap: () {},
                     imagepath: 'assets/images/Clothinggrid1.png',
                   ),
-                  SizedBox(width: 15.w),
+                  SizedBox(width: 10.w),
                   ProducrCard(
                     width: 100,
                     onTap: () {},
                     imagepath: 'assets/images/Clothinggrid4.png',
                   ),
-                  SizedBox(width: 15.w),
+                  SizedBox(width: 10.w),
                 ],
               ),
               SizedBox(height: 30.h),
@@ -408,19 +449,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {},
                     imagepath: 'assets/images/Clothinggrid1.png',
                   ),
-                  SizedBox(width: 15.w),
+                  SizedBox(width: 10.w),
                   ProducrCard(
                     width: 100,
                     onTap: () {},
                     imagepath: 'assets/images/Clothinggrid4.png',
                   ),
-                  SizedBox(width: 15.w),
+                  SizedBox(width: 10.w),
                   ProducrCard(
                     width: 100,
                     onTap: () {},
                     imagepath: 'assets/images/Clothinggrid3.png',
                   ),
-                  SizedBox(width: 15.w),
+                  SizedBox(width: 10.w),
                 ],
               ),
             ],
