@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/product_circle.dart';
+import 'package:shoppe/screens/common_widgets/selection_button.dart';
+import 'package:shoppe/screens/home/product_details.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -10,6 +12,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -181,6 +184,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
                 ),
               ),
+              SizedBox(height: 13.h),
+              Row(
+                children: [
+                  SelectionButton(
+                    onPressed: () {
+                      setState(() {
+                        selectedIndex = 0;
+                      });
+                    },
+                    text: 'To Recieve',
+                    width: 50.w,
+                    height: 25.h,
+                    bordercolor: selectedIndex == 0
+                        ? Color(0xFF004CFF)
+                        : Colors.transparent,
+                    color: Color(0xFFF9F9F9),
+                  ),
+                  SizedBox(width: 50.w),
+                  SelectionButton(
+                    onPressed: () {
+                      setState(() {
+                        selectedIndex = 1;
+                      });
+                    },
+                    text: 'To Pay',
+                    width: 50.w,
+                    height: 25.h,
+                    bordercolor: selectedIndex == 1
+                        ? Color(0xFF004CFF)
+                        : Colors.transparent,
+                    color: Color(0xFFF9F9F9),
+                  ),
+                ],
+              ),
+              //  selectedIndex == 0 ?
             ],
           ),
         ),
