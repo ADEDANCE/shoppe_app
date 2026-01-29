@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/delivery_type.dart';
+import 'package:shoppe/screens/common_widgets/quantity_button.dart';
 import 'package:shoppe/screens/common_widgets/review_widget.dart';
 
 int selectedIndex = 1;
-int quantity = 0;
+int quantity = 1;
 int selecteddelivery = 0;
 bool isFavorite = false;
 
@@ -34,25 +35,6 @@ class _ProductDetailsState extends State<ProductDetails> {
           width: 2,
           color: isSelected ? Color(0xFF004CFF) : Colors.transparent,
         ),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
-      ),
-    );
-  }
-
-  Widget _quantityButton(String text, VoidCallback onPressed) {
-    // final bool isSelected = selectedIndex == index;
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        minimumSize: Size(10.w, 20.h),
-        backgroundColor: Color(0xFFE5EBFC),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.r),
-        ),
-        side: BorderSide(width: 2, color: Color(0xFF004CFF)),
       ),
       child: Text(
         text,
@@ -138,13 +120,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  _quantityButton('-', () {
-                                    setState(() {
-                                      if (quantity > 1) {
-                                        quantity = quantity - 1;
-                                      }
-                                    });
-                                  }),
+                                  QuantityButton(
+                                    text: '-',
+                                    onPressed: () {
+                                      setState(() {
+                                        if (quantity > 1) {
+                                          quantity = quantity - 1;
+                                        }
+                                      });
+                                    },
+                                  ),
                                   SizedBox(width: 8.w),
                                   Container(
                                     width: 74.w,
@@ -164,11 +149,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                                     ),
                                   ),
                                   SizedBox(width: 8.w),
-                                  _quantityButton('+', () {
-                                    setState(() {
-                                      quantity = quantity + 1;
-                                    });
-                                  }),
+                                  QuantityButton(
+                                    text: '+',
+                                    onPressed: () {
+                                      setState(() {
+                                        quantity = quantity + 1;
+                                      });
+                                    },
+                                  ),
                                 ],
                               ),
                             ],
