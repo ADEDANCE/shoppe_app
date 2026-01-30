@@ -6,6 +6,8 @@ class ButtonWidget extends StatelessWidget {
   final Color color;
   final double width;
   final double height;
+  final Color? bordercolor;
+  final Color? textcolor;
   const ButtonWidget({
     super.key,
     required this.text,
@@ -13,6 +15,8 @@ class ButtonWidget extends StatelessWidget {
     required this.color,
     required this.height,
     required this.width,
+    this.bordercolor,
+    this.textcolor,
   });
 
   @override
@@ -23,11 +27,12 @@ class ButtonWidget extends StatelessWidget {
         backgroundColor: color,
         minimumSize: Size(width, height),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        side: BorderSide(width: 2, color: bordercolor ?? Colors.transparent),
       ),
       child: Text(
         text,
         style: TextStyle(
-          color: Colors.white,
+          color: textcolor ?? Colors.white,
           fontSize: 15,
           fontWeight: FontWeight.normal,
         ),
