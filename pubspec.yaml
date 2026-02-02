@@ -38,6 +38,9 @@ dependencies:
   flutter_custom_clippers: ^2.1.0
   flutter_intl_phone_field: ^0.0.7
   carousel_slider: ^5.1.1
+  country_picker: ^2.0.27
+  language_picker: ^0.4.5
+ 
 
 dev_dependencies:
   flutter_test:
