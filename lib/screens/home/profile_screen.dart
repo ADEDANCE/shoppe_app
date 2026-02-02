@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/product_circle.dart';
 import 'package:shoppe/screens/common_widgets/selection_button.dart';
-import 'package:shoppe/screens/home/product_details.dart';
+import 'package:shoppe/screens/home/setting/setting_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -85,7 +85,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       SizedBox(width: 15.w),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => SettingScreen()),
+                          );
+                        },
                         child: CircleAvatar(
                           radius: 15,
                           child: Image.asset(
