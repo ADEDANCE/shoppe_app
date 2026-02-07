@@ -40,6 +40,7 @@ dependencies:
   carousel_slider: ^5.1.1
   country_picker: ^2.0.27
   language_picker: ^0.4.5
+  firebase_core: ^4.4.0
  
 
 dev_dependencies:

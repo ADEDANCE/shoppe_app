@@ -1,5 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoppe/firebase_options.dart';
 import 'package:shoppe/screens/home/home_nav.dart';
 import 'package:shoppe/screens/home/home_screen.dart';
 import 'package:shoppe/screens/onbarding/createaccount_screen.dart';
@@ -11,7 +13,12 @@ import 'package:shoppe/screens/onbarding/resetpassword_screen.dart';
 import 'package:shoppe/screens/onbarding/splash_screen.dart';
 import 'package:shoppe/screens/onbarding/start.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+   
+    options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(
     ScreenUtilInit(
       designSize: const Size(440, 956),

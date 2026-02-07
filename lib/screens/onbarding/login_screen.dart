@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/textfield.dart';
-import 'package:shoppe/screens/home/home_nav.dart';
 import 'package:shoppe/screens/onbarding/password_screen.dart';
 
 class LoginScreen extends StatefulWidget {

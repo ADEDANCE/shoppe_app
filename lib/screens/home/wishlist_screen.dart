@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/product_card.dart';
-import 'package:shoppe/screens/mock_product.dart';
 
 class WishlistScreen extends StatefulWidget {
   const WishlistScreen({super.key});
