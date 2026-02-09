@@ -6,11 +6,10 @@ import 'package:shoppe/screens/common_widgets/carousel_card.dart';
 import 'package:shoppe/screens/common_widgets/categories_card.dart';
 import 'package:shoppe/screens/common_widgets/product_card.dart';
 import 'package:shoppe/screens/common_widgets/product_circle.dart';
-import 'package:shoppe/screens/home/product_screen.dart';
-import 'package:shoppe/screens/home/search_screen.dart';
+import 'package:shoppe/screens/user_side/home/search_screen.dart';
 //import 'package:shoppe/screens/mock_product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shoppe/services/product_categories.dart';
+import 'package:shoppe/screens/user_side/services/product_categories.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
