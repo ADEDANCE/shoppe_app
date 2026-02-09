@@ -5,7 +5,7 @@ import 'package:shoppe/screens/common_widgets/delivery_type.dart';
 import 'package:shoppe/screens/common_widgets/info_container.dart';
 import 'package:shoppe/screens/common_widgets/product_circle.dart';
 import 'package:shoppe/screens/common_widgets/purchase_index.dart';
-import 'package:shoppe/screens/home/ordertracking_screen.dart';
+import 'package:shoppe/screens/user_side/home/ordertracking_screen.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});

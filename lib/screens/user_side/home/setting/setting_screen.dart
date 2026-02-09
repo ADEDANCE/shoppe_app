@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/dropdown_row.dart';
-import 'package:shoppe/screens/home/setting/about_us_screen.dart';
-import 'package:shoppe/screens/home/setting/add_card_screen.dart';
-import 'package:shoppe/screens/home/setting/language_screen.dart';
-import 'package:shoppe/screens/home/setting/profile_setting_screen.dart';
-import 'package:shoppe/screens/home/setting/shippingaddress_screen.dart';
+import 'package:shoppe/screens/user_side/home/setting/about_us_screen.dart';
+import 'package:shoppe/screens/user_side/home/setting/add_card_screen.dart';
+import 'package:shoppe/screens/user_side/home/setting/language_screen.dart';
+import 'package:shoppe/screens/user_side/home/setting/profile_setting_screen.dart';
+import 'package:shoppe/screens/user_side/home/setting/shippingaddress_screen.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});

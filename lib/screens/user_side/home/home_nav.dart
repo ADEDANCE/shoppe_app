@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shoppe/screens/home/cart_screen.dart';
-import 'package:shoppe/screens/home/home_screen.dart';
-import 'package:shoppe/screens/home/profile_screen.dart';
-import 'package:shoppe/screens/home/wishlist_screen.dart';
+import 'package:shoppe/screens/user_side/home/cart_screen.dart';
+import 'package:shoppe/screens/user_side/home/home_screen.dart';
+import 'package:shoppe/screens/user_side/home/profile_screen.dart';
+import 'package:shoppe/screens/user_side/home/wishlist_screen.dart';
 
 class HomeNav extends StatefulWidget {
   const HomeNav({super.key});

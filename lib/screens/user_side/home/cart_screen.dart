@@ -4,7 +4,7 @@ import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/info_container.dart';
 import 'package:shoppe/screens/common_widgets/product_card.dart';
 import 'package:shoppe/screens/common_widgets/quantity_button.dart';
-import 'package:shoppe/screens/home/payment_screen.dart';
+import 'package:shoppe/screens/user_side/home/payment_screen.dart';
 
 int quantity = 1;
 

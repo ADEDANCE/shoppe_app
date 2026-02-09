@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoppe/screens/common_widgets/product_card.dart';
-import 'package:shoppe/screens/home/product_details.dart';
+import 'package:shoppe/screens/user_side/home/product_details.dart';
 import 'package:shoppe/screens/mock_product.dart';
 
 class SearchScreen extends StatefulWidget {
