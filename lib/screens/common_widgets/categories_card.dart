@@ -54,7 +54,7 @@ class CategoriesCard extends StatelessWidget {
                     primary: false,
                     itemCount: images.length.clamp(0, 4), // safety
                     itemBuilder: (context, index) {
-                      return Image.asset(images[index], fit: BoxFit.cover);
+                      return Image.network(images[index], fit: BoxFit.cover) ;
                     },
                   ),
                 ),

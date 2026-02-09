@@ -41,6 +41,7 @@ dependencies:
   country_picker: ^2.0.27
   language_picker: ^0.4.5
   firebase_core: ^4.4.0
+  cloud_firestore: ^6.1.2
  
 
 dev_dependencies:
