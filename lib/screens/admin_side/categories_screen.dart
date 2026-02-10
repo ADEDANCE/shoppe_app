@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoppe/screens/admin_side/add_categories.dart';
 import 'package:shoppe/screens/common_widgets/admin_card.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -28,16 +29,44 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           Expanded(child: SingleChildScrollView(
             child: Column(
               children: [
-                AdminCard(icon: Icon(Icons.import_contacts), title: "ELectronics", amount: "150 available", onTap: (){}),
+                AdminCard(icon: Icon(Icons.import_contacts), title: "ELectronics", amount: "150 available", onTap: (){},
+                editicon: Icon(Icons.edit_outlined) ,editTap: () {
+                  
+                }, deleteicon: Icon(Icons.delete_outline), deleteTap: () {
+                  
+                },
+                ),
                 SizedBox(height: 10.h,),
-                  AdminCard(icon: Icon(Icons.import_contacts), title: "ELectronics", amount: "150 available", onTap: (){}),
+                  AdminCard(icon: Icon(Icons.import_contacts), title: "ELectronics", amount: "150 available", onTap: (){},
+                     editicon: Icon(Icons.edit_outlined) ,editTap: () {
+                  
+                }, deleteicon: Icon(Icons.delete_outline), deleteTap: () {
+                  
+                },
+                  ),
                 SizedBox(height: 10.h,),
-                  AdminCard(icon: Icon(Icons.import_contacts), title: "ELectronics", amount: "150 available", onTap: (){}),
+                  AdminCard(icon: Icon(Icons.import_contacts), title: "ELectronics", amount: "150 available", onTap: (){},
+                     editicon: Icon(Icons.edit_outlined) ,editTap: () {
+                  
+                }, deleteicon: Icon(Icons.delete_outline), deleteTap: () {
+                  
+                },),
                 SizedBox(height: 10.h,),
               ],
             ),
-          ))
-
+          )),
+         Align(
+          alignment: Alignment.bottomRight,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (_) => AddCategories()));
+            },
+        child:    CircleAvatar(
+            radius: 35,
+            backgroundColor: Color(0xFF004CFF),
+            child: Icon(Icons.add, color: Colors.white, size: 40,),
+          ),
+         ))
 ]))));
   }
 }
