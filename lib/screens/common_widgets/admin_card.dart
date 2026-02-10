@@ -2,65 +2,106 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AdminCard extends StatelessWidget {
-  final Icon icon;
+  final Icon? icon;
   final String title;
+  final String? imagepath;
   final String amount;
   final VoidCallback onTap;
-  const AdminCard({super.key,
-  required this.icon,
-  required this.title,
-  required this.amount,
-  required this.onTap,
+  final Icon? editicon;
+  final Icon? deleteicon;
+  final VoidCallback? editTap;
+  final VoidCallback? deleteTap;
+  final Color? price;
+  const AdminCard({
+    super.key,
+    this.icon,
+    this.imagepath,
+    required this.title,
+    required this.amount,
+    required this.onTap,
+    this.editicon,
+    this.deleteicon,
+    this.editTap,
+    this.deleteTap,
+    this.price,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector( onTap: onTap, child: Container(
-            padding: EdgeInsets.all(18),
-            decoration: BoxDecoration(
-              color: Color(0xFFD9E4FF),
-                borderRadius: BorderRadius.circular(16),
-            ),
-            child: Row(
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: Color(0xFFD9E4FF),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
               children: [
-                Container(
-                  padding: EdgeInsets.all(18),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: Colors.white
+                if (icon != null) ...[
+                  Container(
+                    padding: EdgeInsets.all(18),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: Colors.white,
+                    ),
+                    child: icon,
+                    // Icon(Icons.grid_4x4),
                   ),
-                  child: icon,
-                  // Icon(Icons.grid_4x4),
-                ),
-                SizedBox(width: 15.w,),
+                ],
+                if (imagepath != null) ...[
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(imagepath!, fit: BoxFit.cover),
+                  ),
+                ],
+                SizedBox(width: 15.w),
                 Column(
-                 // mainAxisAlignment: MainAxisAlignment.start,
+                  // mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       title,
-                      
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Align(
                       alignment: Alignment.centerLeft,
-                        child: Text(
-                          amount,
-                          
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w200,
-                    ),
-                    ),
-                    ),
+                      child: Text(
+                        amount,
 
+                        style: TextStyle(
+                          color: price ?? Colors.black,
+
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
                   ],
-                )
+                ),
               ],
             ),
-    ));
+            Row(
+              children: [
+                if (editicon != null) ...[
+                  GestureDetector(onTap: editTap, child: editicon!),
+                ],
+                SizedBox(width: 15),
+                if (deleteicon != null) ...[
+                  GestureDetector(onTap: deleteTap, child: deleteicon!),
+                ],
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
