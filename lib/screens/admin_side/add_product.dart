@@ -21,7 +21,7 @@ class _AddProductState extends State<AddProduct> {
   File? _selectedImage;
   String? selectedValue;
 
-  final List<String> options = ["Option 1", "Option 2", "Option 3"];
+  final List<String> options = ["Clothing", "Bag", "Shoe"];
 
   Future<void> pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
@@ -38,6 +38,7 @@ class _AddProductState extends State<AddProduct> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF004CFF),
+        iconTheme: IconThemeData(color: Colors.white),
         actionsPadding: EdgeInsets.all(16),
         title: Text("Add Category", style: TextStyle(color: Colors.white)),
       ),
@@ -85,9 +86,21 @@ class _AddProductState extends State<AddProduct> {
                       ),
 
                       SizedBox(height: 30.h),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Category",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.sp,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 15.h),
                       DropdownButtonFormField<String>(
-                        value: selectedValue,
-                        hint: Text("Select an option"),
+                        initialValue: selectedValue,
+                        hint: Text("Select category"),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -128,6 +141,20 @@ class _AddProductState extends State<AddProduct> {
                               : Image.file(_selectedImage!),
                         ),
                       ),
+                      SizedBox(height: 30.h),
+                      TextField(
+                        maxLines: 5,
+                        minLines: 3,
+                        keyboardType: TextInputType.multiline,
+                        decoration: InputDecoration(
+                          hintText: "Enter description...",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          contentPadding: const EdgeInsets.all(12),
+                        ),
+                      ),
+                      SizedBox(height: 30.h),
                     ],
                   ),
                 ),
