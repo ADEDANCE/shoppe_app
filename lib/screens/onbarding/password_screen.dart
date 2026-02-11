@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shoppe/screens/admin_side/admin_home_screen.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/password_box.dart';
+import 'package:shoppe/screens/user_side/home/home_nav.dart';
 
 class PasswordScreen extends StatefulWidget {
   const PasswordScreen({super.key});
@@ -118,9 +118,8 @@ class _PasswordScreenState extends State<PasswordScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder:
-                            (_) => //HomeNav()
-                                AdminHomeScreen(),
+                        builder: (_) => HomeNav(),
+                        //   AdminHomeScreen(),
                       ),
                     );
                   },
