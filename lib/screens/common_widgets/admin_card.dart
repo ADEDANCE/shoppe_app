@@ -12,6 +12,7 @@ class AdminCard extends StatelessWidget {
   final VoidCallback? editTap;
   final VoidCallback? deleteTap;
   final Color? price;
+  final String? category;
   const AdminCard({
     super.key,
     this.icon,
@@ -24,6 +25,7 @@ class AdminCard extends StatelessWidget {
     this.editTap,
     this.deleteTap,
     this.price,
+    this.category,
   });
 
   @override
@@ -75,15 +77,36 @@ class AdminCard extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         amount,
-
                         style: TextStyle(
                           color: price ?? Colors.black,
-
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
+                    if (category != null) ...[
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 7,
+                            horizontal: 8,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(18),
+                            color: Colors.white54,
+                          ),
+                          child: Text(
+                            category!,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ],
