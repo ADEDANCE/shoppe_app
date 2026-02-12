@@ -23,18 +23,21 @@ class _AddCategoriesState extends State<AddCategories> {
   final TextEditingController _amountcontroller = TextEditingController();
   final ImagePicker _picker = ImagePicker();
   List<File> _selectedImages = [];
-
+  // send images to cloudinary and return url
   Future<String> uploadToCloudinary(File image) async {
+    // Cloudinary upload endpoint
     final url = Uri.parse(
       "https://api.cloudinary.com/v1_1/dbiiblk01/image/upload",
     );
 
     var request = http.MultipartRequest("POST", url);
+    //permission to upload without login
     request.fields["upload_preset"] = "shopee";
 
     request.files.add(await http.MultipartFile.fromPath("file", image.path));
 
     var response = await request.send();
+    //Converts server response into readable text
     var responseData = await response.stream.bytesToString();
 
     final jsonData = jsonDecode(responseData);
@@ -44,7 +47,7 @@ class _AddCategoriesState extends State<AddCategories> {
 
   Future<List<String>> uploadAllImages() async {
     List<String> urls = [];
-
+    //Loops through each selected image
     for (File image in _selectedImages) {
       String url = await uploadToCloudinary(image);
       urls.add(url);
@@ -64,6 +67,7 @@ class _AddCategoriesState extends State<AddCategories> {
     }
 
     try {
+      showLoadingDialog();
       // upload images first
       List<String> imageUrls = await uploadAllImages();
 
@@ -74,6 +78,7 @@ class _AddCategoriesState extends State<AddCategories> {
         "images": imageUrls,
         "createdAt": Timestamp.now(),
       });
+      if (!mounted) return;
 
       ScaffoldMessenger.of(
         context,
@@ -83,11 +88,13 @@ class _AddCategoriesState extends State<AddCategories> {
         _selectedImages.clear();
         _namecontroller.clear();
         _amountcontroller.clear();
+        hideLoadingDialog();
       });
     } catch (e) {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("Error: $e")));
+      hideLoadingDialog();
     }
   }
 
@@ -102,6 +109,28 @@ class _AddCategoriesState extends State<AddCategories> {
             .toList();
       });
     }
+  }
+
+  void showLoadingDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return const AlertDialog(
+          content: Row(
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(width: 20),
+              Text("Uploading..."),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void hideLoadingDialog() {
+    Navigator.of(context).pop();
   }
 
   @override
@@ -173,7 +202,8 @@ class _AddCategoriesState extends State<AddCategories> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 PreviewImage(
-                                  child: _selectedImages.isNotEmpty
+                                  // ignore: prefer_is_empty
+                                  child: _selectedImages.length > 0
                                       ? ClipRRect(
                                           borderRadius: BorderRadius.circular(
                                             16,
@@ -189,7 +219,7 @@ class _AddCategoriesState extends State<AddCategories> {
                                 ),
                                 SizedBox(width: 8),
                                 PreviewImage(
-                                  child: _selectedImages.isNotEmpty
+                                  child: _selectedImages.length > 1
                                       ? ClipRRect(
                                           borderRadius: BorderRadius.circular(
                                             16,
@@ -210,7 +240,7 @@ class _AddCategoriesState extends State<AddCategories> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 PreviewImage(
-                                  child: _selectedImages.isNotEmpty
+                                  child: _selectedImages.length > 2
                                       ? ClipRRect(
                                           borderRadius: BorderRadius.circular(
                                             16,
@@ -226,7 +256,7 @@ class _AddCategoriesState extends State<AddCategories> {
                                 ),
                                 SizedBox(width: 8),
                                 PreviewImage(
-                                  child: _selectedImages.isNotEmpty
+                                  child: _selectedImages.length > 3
                                       ? ClipRRect(
                                           borderRadius: BorderRadius.circular(
                                             16,
