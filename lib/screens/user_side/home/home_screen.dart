@@ -5,6 +5,7 @@ import 'package:shoppe/screens/common_widgets/carousel_card.dart';
 import 'package:shoppe/screens/common_widgets/categories_card.dart';
 import 'package:shoppe/screens/common_widgets/product_card.dart';
 import 'package:shoppe/screens/common_widgets/product_circle.dart';
+import 'package:shoppe/screens/user_side/home/product_screen.dart';
 import 'package:shoppe/screens/user_side/home/search_screen.dart';
 //import 'package:shoppe/screens/mock_product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -260,17 +261,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             productnum: categories[firstIndex]["amount"]
                                 .toString(),
                             onTap: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (_) => ProductScreen(
-                              //       categoryId:
-                              //           categories[firstIndex]["id"],
-                              //       categoryName:
-                              //           categories[firstIndex]["name"] ,
-                              //     ),
-                              //   ),
-                              // );
+                              // StreamBuilder(stream: service.getProducts(), builder: )
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => ProductScreen(
+                                    //  categoryId: categories[firstIndex]["amount"]
+                                    //    .toString(),
+                                    categoryName:
+                                        categories[firstIndex]["name"],
+                                  ),
+                                ),
+                              );
                             },
                           ),
 
@@ -289,18 +291,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               // categories[secondIndex]["Availablenumber"]
                               //     .toString(),
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (_) => ProductScreen(
-                                //       categoryId:
-                                //           categories[secondIndex]["id"] ,
-                                //       categoryName:
-                                //           categories[secondIndex]["name"],
-
-                                //     ),
-                                //   ),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => ProductScreen(
+                                      categoryName:
+                                          categories[secondIndex]["name"],
+                                    ),
+                                  ),
+                                );
                               },
                             ),
                         ],
