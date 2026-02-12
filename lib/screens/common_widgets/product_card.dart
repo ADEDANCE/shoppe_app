@@ -53,7 +53,7 @@ class ProducrCard extends StatelessWidget {
                       borderRadius: const BorderRadius.vertical(
                         top: Radius.circular(12),
                       ),
-                      child: Image.asset(
+                      child: Image.network(
                         imagepath,
 
                         width: double.infinity, //  TAKE FULL CARD WIDTH

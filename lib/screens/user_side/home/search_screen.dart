@@ -62,13 +62,13 @@ class _SearchScreenState extends State<SearchScreen> {
               ProducrCard(
                 width: 150,
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) =>
-                          ProductDetails(product: searchResults[firstIndex]),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (_) =>
+                  //         ProductDetails(product: searchResults[firstIndex]),
+                  //   ),
+                  // );
                 },
                 imagepath: searchResults[firstIndex]["image"].toString(),
                 name: searchResults[firstIndex]["name"].toString(),
@@ -79,13 +79,13 @@ class _SearchScreenState extends State<SearchScreen> {
                 ProducrCard(
                   width: 150,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) =>
-                            ProductDetails(product: searchResults[secondIndex]),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (_) =>
+                    //         ProductDetails(product: searchResults[secondIndex]),
+                    //   ),
+                    // );
                   },
                   imagepath: searchResults[secondIndex]["image"].toString(),
                   name: searchResults[secondIndex]["name"].toString(),
