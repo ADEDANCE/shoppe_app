@@ -11,10 +11,10 @@ class FirestoreService {
     return _db.collection('products').snapshots();
   }
 
-  Stream<QuerySnapshot> getProductsByCategory(String categoryId) {
+  Stream<QuerySnapshot> getProductsByCategory(String categoryName) {
     return _db
         .collection('products')
-        .where('categoryId', isEqualTo: categoryId)
+        .where('category', isEqualTo: categoryName)
         .snapshots();
   }
 }
