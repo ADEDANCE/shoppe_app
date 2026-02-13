@@ -1,11 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/preview_image.dart';
 import 'package:shoppe/screens/common_widgets/textfield.dart';
+import 'package:http/http.dart' as http;
 
 class AddProduct extends StatefulWidget {
   const AddProduct({super.key});
@@ -17,11 +20,99 @@ class AddProduct extends StatefulWidget {
 class _AddProductState extends State<AddProduct> {
   final TextEditingController _namecontroller = TextEditingController();
   final TextEditingController _amountcontroller = TextEditingController();
+  final TextEditingController _categorycontroller = TextEditingController();
+  final TextEditingController _descriptioncontroller = TextEditingController();
   final ImagePicker _picker = ImagePicker();
   File? _selectedImage;
   String? selectedValue;
 
   final List<String> options = ["Clothing", "Bag", "Shoe"];
+
+  Future<String> uploadToCloudinary(File image) async {
+    // Cloudinary upload endpoint
+    final url = Uri.parse(
+      "https://api.cloudinary.com/v1_1/dbiiblk01/image/upload",
+    );
+    var request = http.MultipartRequest("POST", url);
+    //permission to upload without login
+    request.fields["upload_preset"] = "shopee";
+
+    request.files.add(await http.MultipartFile.fromPath("file", image.path));
+    var response = await request.send();
+    //Converts server response into readable text
+    var responseData = await response.stream.bytesToString();
+
+    final jsonData = jsonDecode(responseData);
+
+    return jsonData["secure_url"];
+  }
+
+  void showLoadingDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return const AlertDialog(
+          content: Row(
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(width: 20),
+              Text("Uploading..."),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void hideLoadingDialog() {
+    Navigator.of(context).pop();
+  }
+
+  Future<void> saveProduct() async {
+    if (_namecontroller.text.isEmpty ||
+        _amountcontroller.text.isEmpty ||
+        _categorycontroller.text.isEmpty ||
+        _descriptioncontroller.text.isEmpty ||
+        _selectedImage == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Fill all fields")));
+      return;
+    }
+    try {
+      showLoadingDialog();
+      // upload images first
+      String imageUrl = await uploadToCloudinary(_selectedImage!);
+      await FirebaseFirestore.instance.collection("products").add({
+        "name": _namecontroller.text,
+        "price": _amountcontroller.text,
+        "category": _categorycontroller.text,
+        "description": _descriptioncontroller.text,
+        "image": imageUrl,
+        "createdAt": Timestamp.now(),
+      });
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Product saved")));
+
+      setState(() {
+        _selectedImage = null;
+        _namecontroller.clear();
+        _amountcontroller.clear();
+        _categorycontroller.clear();
+        _descriptioncontroller.clear();
+        hideLoadingDialog();
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Error: $e")));
+      hideLoadingDialog();
+    }
+  }
 
   Future<void> pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
@@ -98,30 +189,11 @@ class _AddProductState extends State<AddProduct> {
                         ),
                       ),
                       SizedBox(height: 15.h),
-                      DropdownButtonFormField<String>(
-                        initialValue: selectedValue,
-                        hint: Text("Select category"),
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                          ),
-                        ),
-                        items: options.map((item) {
-                          return DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          );
-                        }).toList(),
-                        onChanged: (value) {
-                          setState(() {
-                            selectedValue = value;
-                          });
-                        },
-                      ),
 
+                      Textfield(
+                        controller: _categorycontroller,
+                        hintText: "e.g Bag",
+                      ),
                       SizedBox(height: 30.h),
                       Text(
                         _selectedImage == null ? "select simage" : "Preview",
@@ -145,6 +217,7 @@ class _AddProductState extends State<AddProduct> {
                       TextField(
                         maxLines: 5,
                         minLines: 3,
+                        controller: _descriptioncontroller,
                         keyboardType: TextInputType.multiline,
                         decoration: InputDecoration(
                           hintText: "Enter description...",
@@ -161,7 +234,7 @@ class _AddProductState extends State<AddProduct> {
               ),
               ButtonWidget(
                 text: "Save Product",
-                onPressed: () {},
+                onPressed: saveProduct,
                 color: Color(0xFF004CFF),
                 height: 60.h,
                 width: double.infinity,
