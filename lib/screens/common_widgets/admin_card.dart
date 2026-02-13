@@ -57,7 +57,12 @@ class AdminCard extends StatelessWidget {
                 if (imagepath != null) ...[
                   ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: Image.asset(imagepath!, fit: BoxFit.cover),
+                    child: Image.network(
+                      imagepath!,
+                      width: 140.w,
+                      height: 140.h,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ],
                 SizedBox(width: 15.w),
