@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/admin_side/add_categories.dart';
 import 'package:shoppe/screens/admin_side/edit_categories.dart';
 import 'package:shoppe/screens/common_widgets/admin_card.dart';
+import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/user_side/services/product_categories.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -21,7 +22,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xFF004CFF),
         actionsPadding: EdgeInsets.all(16),
-        title: Text("Admin Panel", style: TextStyle(color: Colors.white)),
+        iconTheme: IconThemeData(color: Colors.white),
+        title: Text("Category", style: TextStyle(color: Colors.white)),
       ),
       body: SafeArea(
         child: Padding(
@@ -71,25 +73,74 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                 );
                               },
                               deleteicon: Icon(Icons.delete_outline),
-                              deleteTap: () async {
-                                try {
-                                  await FirebaseFirestore.instance
-                                      .collection("categories")
-                                      .doc(docId)
-                                      .delete();
+                              // deleteTap: () async {
 
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text("Category deleted")),
-                                  );
-                                } catch (e) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        "Error deleting category: $e",
+                              // },
+                              deleteTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                          16.r,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }
+                                      title: Text("Delete Category "),
+                                      content: Text(
+                                        "Are you sure you want to delete this Category ?",
+                                      ),
+                                      actions: [
+                                        ButtonWidget(
+                                          text: "No",
+                                          onPressed: () {
+                                            Navigator.pop(
+                                              context,
+                                            ); // close dialog
+                                          },
+                                          color: Colors.green,
+                                          height: 30.h,
+                                          width: 100.w,
+                                        ),
+                                        ButtonWidget(
+                                          text: "Yes",
+                                          onPressed: () async {
+                                            Navigator.pop(context);
+                                            try {
+                                              await FirebaseFirestore.instance
+                                                  .collection("categories")
+                                                  .doc(docId)
+                                                  .delete();
+
+                                              ScaffoldMessenger.of(
+                                                context,
+                                              ).showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    "Category deleted",
+                                                  ),
+                                                ),
+                                              );
+                                            } catch (e) {
+                                              ScaffoldMessenger.of(
+                                                context,
+                                              ).showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    "Error deleting category: $e",
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                          },
+                                          color: Colors.red,
+                                          height: 30.h,
+                                          width: 100.w,
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               },
                             ),
                           );
