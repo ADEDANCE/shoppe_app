@@ -78,6 +78,7 @@ class _AddCategoriesState extends State<AddCategories> {
         "images": imageUrls,
         "createdAt": Timestamp.now(),
       });
+      hideLoadingDialog();
       if (!mounted) return;
 
       ScaffoldMessenger.of(
@@ -88,7 +89,6 @@ class _AddCategoriesState extends State<AddCategories> {
         _selectedImages.clear();
         _namecontroller.clear();
         _amountcontroller.clear();
-        hideLoadingDialog();
       });
     } catch (e) {
       ScaffoldMessenger.of(
