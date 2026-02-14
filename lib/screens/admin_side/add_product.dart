@@ -65,9 +65,7 @@ class _AddProductState extends State<AddProduct> {
     );
   }
 
-  void hideLoadingDialog() {
-    Navigator.of(context).pop();
-  }
+  void hideLoadingDialog() {}
 
   Future<void> saveProduct() async {
     if (_namecontroller.text.isEmpty ||
@@ -86,14 +84,16 @@ class _AddProductState extends State<AddProduct> {
       String imageUrl = await uploadToCloudinary(_selectedImage!);
       await FirebaseFirestore.instance.collection("products").add({
         "name": _namecontroller.text,
-        "price": _amountcontroller.text,
+        "price": int.parse(_amountcontroller.text),
         "category": _categorycontroller.text,
         "description": _descriptioncontroller.text,
         "image": imageUrl,
         "createdAt": Timestamp.now(),
       });
-      if (!mounted) return;
 
+      //  await Future.delayed(const Duration(milliseconds: 100));
+      if (!mounted) return;
+      Navigator.of(context).pop();
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("Product saved")));
@@ -104,7 +104,6 @@ class _AddProductState extends State<AddProduct> {
         _amountcontroller.clear();
         _categorycontroller.clear();
         _descriptioncontroller.clear();
-        hideLoadingDialog();
       });
     } catch (e) {
       ScaffoldMessenger.of(
@@ -131,7 +130,7 @@ class _AddProductState extends State<AddProduct> {
         backgroundColor: Color(0xFF004CFF),
         iconTheme: IconThemeData(color: Colors.white),
         actionsPadding: EdgeInsets.all(16),
-        title: Text("Add Category", style: TextStyle(color: Colors.white)),
+        title: Text("Add Product", style: TextStyle(color: Colors.white)),
       ),
       body: SafeArea(
         child: Padding(
