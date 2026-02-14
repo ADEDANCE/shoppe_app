@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/admin_side/add_product.dart';
+import 'package:shoppe/screens/admin_side/edit_product.dart';
 import 'package:shoppe/screens/common_widgets/admin_card.dart';
+import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/user_side/services/product_categories.dart';
 
 class AdminProductScreen extends StatefulWidget {
@@ -44,11 +46,9 @@ class _AdminProductScreenState extends State<AdminProductScreen> {
                           final product = categoryproducts[index];
                           final docId =
                               product.id; //  the document ID in Firestore
-                          // final currentName = product["name"];
-                          // final currentAmount = product["price"];
-                          // final currentImages = List<String>.from(
-                          //   product["image"],
-                          // );
+                          final currentName = product["name"];
+                          final currentAmount = product["price"];
+                          final currentImage = product["image"];
                           return Padding(
                             padding: EdgeInsets.only(bottom: 10.h),
                             child: AdminCard(
@@ -59,70 +59,110 @@ class _AdminProductScreenState extends State<AdminProductScreen> {
                               category: product["category"],
                               onTap: () {},
                               editicon: Icon(Icons.edit_outlined),
-                              editTap: () {},
+                              editTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => EditProduct(
+                                      docId: docId,
+                                      name: currentName,
+                                      price: currentAmount,
+                                      image: currentImage,
+                                    ),
+                                  ),
+                                );
+                              },
                               deleteicon: Icon(
                                 Icons.delete_outline,
                                 color: Colors.redAccent,
                               ),
-                              deleteTap: () {},
+                              deleteTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                          16.r,
+                                        ),
+                                      ),
+                                      title: Text("Delete product"),
+                                      content: Text(
+                                        "Are you sure you want to delete this product?",
+                                      ),
+                                      actions: [
+                                        ButtonWidget(
+                                          text: "No",
+                                          onPressed: () {
+                                            Navigator.pop(
+                                              context,
+                                            ); // close dialog
+                                          },
+                                          color: Colors.green,
+                                          height: 30.h,
+                                          width: 100.w,
+                                        ),
+                                        ButtonWidget(
+                                          text: "Yes",
+                                          onPressed: () async {
+                                            Navigator.pop(context);
+                                            try {
+                                              await FirebaseFirestore.instance
+                                                  .collection("products")
+                                                  .doc(docId)
+                                                  .delete();
+
+                                              ScaffoldMessenger.of(
+                                                context,
+                                              ).showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    "product deleted",
+                                                  ),
+                                                ),
+                                              );
+                                            } catch (e) {
+                                              ScaffoldMessenger.of(
+                                                context,
+                                              ).showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    "Error deleting product: $e",
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                          },
+                                          color: Colors.red,
+                                          height: 30.h,
+                                          width: 100.w,
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
                             ),
                           );
                         }),
-
-                        //         SizedBox(height: 10.h),
-                        //         AdminCard(
-                        //           imagepath: "assets/images/Bag4.png",
-                        //           title: "ELectronics",
-                        //           price: Color(0xFF004CFF),
-                        //           amount: "\$567",
-                        //           category: "Clothing",
-                        //           onTap: () {},
-                        //           editicon: Icon(Icons.edit_outlined),
-                        //           editTap: () {},
-                        //           deleteicon: Icon(
-                        //             Icons.delete_outline,
-                        //             color: Colors.redAccent,
-                        //           ),
-                        //           deleteTap: () {},
-                        //         ),
-                        //         SizedBox(height: 10.h),
-                        //         AdminCard(
-                        //           imagepath: "assets/images/Bag4.png",
-                        //           price: Color(0xFF004CFF),
-                        //           title: "ELectronics",
-                        //           amount: "\$567",
-                        //           onTap: () {},
-                        //           category: "Clothing",
-                        //           editicon: Icon(Icons.edit_outlined),
-                        //           editTap: () {},
-                        //           deleteicon: Icon(
-                        //             Icons.delete_outline,
-                        //             color: Colors.redAccent,
-                        //           ),
-                        //           deleteTap: () {},
-                        //         ),
-                        //         SizedBox(height: 10.h),
-                        //       ],
-                        //     );}),
-                        //   ),
-                        // ),
-                        // Align(
-                        //   alignment: Alignment.bottomRight,
-                        //   child: GestureDetector(
-                        //     onTap: () {
-                        //       Navigator.push(
-                        //         context,
-                        //         MaterialPageRoute(builder: (_) => AddProduct()),
-                        //       );
-                        //     },
-                        //     child: CircleAvatar(
-                        //       radius: 35,
-                        //       backgroundColor: Color(0xFF004CFF),
-                        //       child: Icon(Icons.add, color: Colors.white, size: 40),
-                        //     ),
-                        //   ),
                       );
                     },
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => AddProduct()),
+                    );
+                  },
+                  child: CircleAvatar(
+                    radius: 35,
+                    backgroundColor: Color(0xFF004CFF),
+                    child: Icon(Icons.add, color: Colors.white, size: 40),
                   ),
                 ),
               ),
