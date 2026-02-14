@@ -66,53 +66,58 @@ class AdminCard extends StatelessWidget {
                   ),
                 ],
                 SizedBox(width: 15.w),
-                Column(
-                  // mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
+                SizedBox(
+                  width: 100.w,
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
 
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        amount,
+                        textAlign: TextAlign.start,
                         style: TextStyle(
-                          color: price ?? Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
-                    if (category != null) ...[
+
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 7,
-                            horizontal: 8,
+                        child: Text(
+                          amount,
+                          style: TextStyle(
+                            color: price ?? Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
                           ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(18),
-                            color: Colors.white54,
-                          ),
-                          child: Text(
-                            category!,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      if (category != null) ...[
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 7,
+                              horizontal: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18),
+                              color: Colors.white54,
+                            ),
+                            child: Text(
+                              category!,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ],
-                  ],
+                  ),
                 ),
               ],
             ),
