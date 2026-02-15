@@ -81,6 +81,19 @@ class _EditProductState extends State<EditProduct> {
     return jsonData["secure_url"];
   }
 
+  List<String> buildSearchKeywords(String text) {
+    text = text.toLowerCase();
+    List<String> keywords = [];
+
+    String current = "";
+    for (int i = 0; i < text.length; i++) {
+      current += text[i];
+      keywords.add(current);
+    }
+
+    return keywords;
+  }
+
   Future<void> updateProduct() async {
     try {
       String imageUrl = currentImage;
@@ -97,6 +110,8 @@ class _EditProductState extends State<EditProduct> {
             "name": nameController.text,
             "price": int.parse(amountController.text),
             "image": imageUrl,
+            "keywords": buildSearchKeywords(nameController.text),
+
             "updatedAt": Timestamp.now(),
           });
 
