@@ -55,7 +55,7 @@ class ProducrCard extends StatelessWidget {
                       ),
                       child: Image.network(
                         imagepath,
-
+                        height: 150.h,
                         width: double.infinity, //  TAKE FULL CARD WIDTH
                         fit: BoxFit.cover,
                       ),
