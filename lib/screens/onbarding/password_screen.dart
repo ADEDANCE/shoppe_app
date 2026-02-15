@@ -119,9 +119,8 @@ class _PasswordScreenState extends State<PasswordScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) =>
-                            //HomeNav(),
-                            AdminHomeScreen(),
+                        builder: (_) => HomeNav(),
+                        // AdminHomeScreen(),
                       ),
                     );
                   },
