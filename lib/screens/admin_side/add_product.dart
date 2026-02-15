@@ -28,6 +28,19 @@ class _AddProductState extends State<AddProduct> {
 
   final List<String> options = ["Clothing", "Bag", "Shoe"];
 
+  List<String> buildSearchKeywords(String text) {
+    text = text.toLowerCase();
+    List<String> keywords = [];
+
+    String current = "";
+    for (int i = 0; i < text.length; i++) {
+      current += text[i];
+      keywords.add(current);
+    }
+
+    return keywords;
+  }
+
   Future<String> uploadToCloudinary(File image) async {
     // Cloudinary upload endpoint
     final url = Uri.parse(
@@ -88,6 +101,7 @@ class _AddProductState extends State<AddProduct> {
         "category": _categorycontroller.text,
         "description": _descriptioncontroller.text,
         "image": imageUrl,
+        "keywords": buildSearchKeywords(_namecontroller.text),
         "createdAt": Timestamp.now(),
       });
 
