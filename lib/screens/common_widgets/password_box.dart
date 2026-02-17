@@ -46,10 +46,10 @@ class PasswordBox extends StatelessWidget {
                   //  passwordControllers[index],
                   focusNode: focusNodes[index],
                   // passwordfocuNode[index],
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  keyboardType: TextInputType.number,
+                  // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  // keyboardType: TextInputType.number,
                   maxLength: 1,
-                  obscureText: obscureText,
+                  obscureText: false,
                   onChanged: (value) {
                     if (value.isNotEmpty && index < pinLength - 1) {
                       // Automatically moves focus to next PIN box when a digit is entered,
