@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
@@ -14,6 +15,53 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   // final TextEditingController _emailcontroller =TextEditingController();
   final TextEditingController _emailcontroller = TextEditingController();
+  Future<DocumentSnapshot?> getUserByEmail(String email) async {
+    final query = await FirebaseFirestore.instance
+        .collection("users")
+        .where("email", isEqualTo: email)
+        .limit(1)
+        .get();
+    if (query.docs.isEmpty) return null;
+
+    return query.docs.first;
+  }
+
+  void handleNext() async {
+    final email = _emailcontroller.text.trim();
+
+    final userDoc = await getUserByEmail(email);
+    if (!mounted) return;
+    if (userDoc == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("User not found")));
+      return;
+    }
+
+    final imageUrl = userDoc["imageUrl"];
+    final userName = userDoc["userName"];
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => PasswordScreen(
+          email: email,
+          imageUrl: imageUrl,
+          userName: userName,
+        ),
+      ),
+    );
+  }
+
+  bool get isemailvalid {
+    return _emailcontroller.text.trim().isNotEmpty;
+  }
+
+  @override
+  void dispose() {
+    _emailcontroller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,23 +131,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Textfield(controller: _emailcontroller, hintText: "Email"),
+                Textfield(
+                  controller: _emailcontroller,
+                  hintText: "Email",
+                  onChanged: (_) => setState(() {}),
+                ),
 
                 SizedBox(height: 30),
                 ButtonWidget(
                   width: double.infinity,
                   height: 61,
                   text: 'Next',
-                  color: Color(0xFF004CFF),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => PasswordScreen(),
-                        //HomeNav()
-                      ),
-                    );
-                  },
+                  color: isemailvalid ? Color(0xFF004CFF) : Color(0xFFD9E4FF),
+                  onPressed: isemailvalid
+                      ? () {
+                          handleNext();
+                        }
+                      : null,
                 ),
                 GestureDetector(
                   child: Text(
