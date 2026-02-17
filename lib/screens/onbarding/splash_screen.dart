@@ -9,8 +9,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-   @override
+  @override
   void initState() {
     // goHome();
     super.initState();
@@ -18,29 +17,29 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void goHome() async {
-    await Future.delayed(const Duration(seconds: 1) );
-     if (!mounted) return;
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Start() ));
-   }
+    await Future.delayed(const Duration(seconds: 1));
+    if (!mounted) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Start()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
       body: Center(
-  child:
-         Column(
-         mainAxisAlignment: MainAxisAlignment.center,
-         // crossAxisAlignment: CrossAxisAlignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-             Image.asset('assets/images/circlelogo.png'),
-             //Image.asset(),
-             Text("Shoppe",
-             style: TextStyle(
-              fontSize: 52,
-              fontWeight: FontWeight.bold,
-             ),
-             )
+            Image.asset('assets/images/circlelogo.png'),
+            //Image.asset(),
+            Text(
+              "Shoppe",
+              style: TextStyle(fontSize: 52, fontWeight: FontWeight.bold),
+            ),
           ],
         ),
       ),
