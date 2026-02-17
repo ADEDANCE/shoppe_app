@@ -4,11 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shoppe/screens/common_widgets/loading_dailog.dart';
-import 'package:shoppe/screens/common_widgets/phonefield_widget.dart';
+//import 'package:shoppe/screens/common_widgets/phonefield_widget.dart';
 import 'package:shoppe/screens/common_widgets/textfield.dart';
 import 'package:shoppe/screens/onbarding/login_screen.dart';
 import 'package:shoppe/screens/user_side/services/upload_image.dart';
@@ -24,13 +23,13 @@ class _CreateaccountScreenState extends State<CreateaccountScreen> {
   final TextEditingController _emailcontroller = TextEditingController();
   final TextEditingController _passwordcontroller = TextEditingController();
   final TextEditingController _usernamecontroller = TextEditingController();
-  final TextEditingController _phonecontroller = TextEditingController();
+  // final TextEditingController _phonecontroller = TextEditingController();
   final ImagePicker _picker = ImagePicker();
   File? profileImage;
   bool get isFormValid {
     return _emailcontroller.text.trim().isNotEmpty &&
-        _passwordcontroller.text.trim().isNotEmpty &&
-        _phonecontroller.text.trim().isNotEmpty &&
+        _passwordcontroller.text.trim().length == 6 &&
+        //   _phonecontroller.text.trim().isNotEmpty &&
         _usernamecontroller.text.trim().isNotEmpty &&
         profileImage != null;
   }
@@ -43,7 +42,7 @@ class _CreateaccountScreenState extends State<CreateaccountScreen> {
     _emailcontroller.addListener(() => setState(() {}));
     _passwordcontroller.addListener(() => setState(() {}));
     _usernamecontroller.addListener(() => setState(() {}));
-    _phonecontroller.addListener(() => setState(() {}));
+    //  _phonecontroller.addListener(() => setState(() {}));
   }
 
   @override
@@ -51,7 +50,7 @@ class _CreateaccountScreenState extends State<CreateaccountScreen> {
     _emailcontroller.dispose();
     _passwordcontroller.dispose();
     _usernamecontroller.dispose();
-    _phonecontroller.dispose();
+    // _phonecontroller.dispose();
     super.dispose();
   }
 
@@ -111,7 +110,7 @@ class _CreateaccountScreenState extends State<CreateaccountScreen> {
     //save a user profile in Firestore:
     await FirebaseFirestore.instance.collection("users").doc(uid).set({
       "email": _emailcontroller.text.trim(),
-      "phone": _phonecontroller.text.trim(),
+      //   "phone": _phonecontroller.text.trim(),
       "userName": _usernamecontroller.text.trim(),
       "imageUrl": imageUrl,
       "role": "user",
@@ -153,22 +152,21 @@ class _CreateaccountScreenState extends State<CreateaccountScreen> {
       backgroundColor: Color(0xFFFFFFFF),
       body: Stack(
         children: [
-          Positioned(
-            top: -150,
-            right: 0,
-            left: -150,
-            child: ClipPath(
-              clipper: WaveClipperTwo(),
+          // Positioned(
+          //   top: -150,
+          //   right: 0,
+          //   left: -150,
+          //   child: ClipPath(
+          //     clipper: WaveClipperTwo(),
 
-              child: CircleAvatar(
-                radius: 200.r,
-                backgroundColor: Color(0xFFD9E4FF),
-              ),
-            ),
-          ),
-
+          //     child: CircleAvatar(
+          //       radius: 200.r,
+          //       backgroundColor: Color(0xFFD9E4FF),
+          //     ),
+          //   ),
+          // ),
           Positioned(
-            top: 160,
+            top: 50,
             left: 230,
             //  child:  ClipPath(
             //clipper: WaveClipperOne(),
@@ -183,7 +181,7 @@ class _CreateaccountScreenState extends State<CreateaccountScreen> {
             padding: EdgeInsets.all(16),
             child: Column(
               children: [
-                SizedBox(height: 50),
+                SizedBox(height: 40.h),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -202,7 +200,7 @@ class _CreateaccountScreenState extends State<CreateaccountScreen> {
                 //             backgroundColor: Color(0xFF004CFF),
                 //       ),
                 //      ),
-                SizedBox(height: 50),
+                // SizedBox(height: 50),
                 GestureDetector(
                   onTap: pickImage,
                   child: Align(
@@ -228,31 +226,33 @@ class _CreateaccountScreenState extends State<CreateaccountScreen> {
                           ),
                   ),
                 ),
-                SizedBox(height: 20),
-                Textfield(controller: _emailcontroller, hintText: "Email"),
                 SizedBox(height: 10),
-                Textfield(
-                  controller: _passwordcontroller,
-                  hintText: "Password",
-                  issuffixIcon: true,
-                ),
+                Textfield(controller: _emailcontroller, hintText: "Email"),
                 SizedBox(height: 10),
                 Textfield(
                   controller: _usernamecontroller,
                   hintText: "user name",
                 ),
                 SizedBox(height: 10),
-                PhonefieldWidget(
-                  onChanged: (phone) {
-                    setState(() {});
-                    // setState(() {
-                    //                       phonenumber = phone
-                    //                           .completeNumber; // Save full phone number
-                    //                     });
-                  },
-                  controller: _phonecontroller,
-                  hintText: 'Your number',
+                Textfield(
+                  controller: _passwordcontroller,
+                  hintText: "Password",
+                  issuffixIcon: true,
+                  maxLength: 6,
                 ),
+
+                // SizedBox(height: 10),
+                // PhonefieldWidget(
+                //   onChanged: (phone) {
+                //     setState(() {});
+                //     // setState(() {
+                //     //                       phonenumber = phone
+                //     //                           .completeNumber; // Save full phone number
+                //     //                     });
+                //   },
+                //   controller: _phonecontroller,
+                //   hintText: 'Your number',
+                // ),
                 Spacer(),
                 ElevatedButton(
                   onPressed: isFormValid ? handleSignup : null,
