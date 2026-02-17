@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
+import 'package:shoppe/screens/onbarding/recover_password.dart';
 
 enum Method { sms, email }
 
@@ -142,7 +143,10 @@ class _ForgetpasswordScreenState extends State<ForgetpasswordScreen> {
                 text: 'Next',
                 color: Color(0xFF004CFF),
                 onPressed: () {
-                  Navigator.popAndPushNamed(context, '/recoverpassword');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => RecoverPassword()),
+                  );
                 },
               ),
             ),

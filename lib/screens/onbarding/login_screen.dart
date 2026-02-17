@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
+import 'package:shoppe/screens/common_widgets/loading_dailog.dart';
 import 'package:shoppe/screens/common_widgets/textfield.dart';
 import 'package:shoppe/screens/onbarding/password_screen.dart';
 
@@ -27,11 +29,13 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void handleNext() async {
+    showLoadingDialog(context);
     final email = _emailcontroller.text.trim();
 
     final userDoc = await getUserByEmail(email);
     if (!mounted) return;
     if (userDoc == null) {
+      Navigator.pop(context);
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text("User not found")));
@@ -40,6 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final imageUrl = userDoc["imageUrl"];
     final userName = userDoc["userName"];
+    Navigator.pop(context);
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -65,6 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xFFFFFFFF),
       body: Column(
         children: [
@@ -137,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onChanged: (_) => setState(() {}),
                 ),
 
-                SizedBox(height: 30),
+                SizedBox(height: 230.h),
                 ButtonWidget(
                   width: double.infinity,
                   height: 61,

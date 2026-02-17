@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/password_box.dart';
+import 'package:shoppe/screens/onbarding/resetpassword_screen.dart';
 
 class RecoverPassword extends StatefulWidget {
   const RecoverPassword({super.key});
@@ -116,7 +117,10 @@ class _RecoverPasswordState extends State<RecoverPassword> {
                 text: 'Send Again',
                 color: Color(0xFFFF5790),
                 onPressed: () {
-                  Navigator.popAndPushNamed(context, '/resetpassword');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => ResetpasswordScreen()),
+                  );
                 },
               ),
             ),

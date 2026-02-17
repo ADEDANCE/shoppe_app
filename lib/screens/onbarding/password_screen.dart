@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shoppe/screens/admin_side/admin_home_screen.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/loading_dailog.dart';
 import 'package:shoppe/screens/common_widgets/password_box.dart';
+import 'package:shoppe/screens/onbarding/login_screen.dart';
 import 'package:shoppe/screens/user_side/home/home_nav.dart';
 
 class PasswordScreen extends StatefulWidget {
@@ -41,9 +41,11 @@ class _PasswordScreenState extends State<PasswordScreen> {
   }
 
   Future<void> login() async {
+    String password = passwordControllers.map((c) => c.text).join();
+
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: widget.email,
-      password: passwordControllers.join().trim(),
+      password: password,
     );
   }
 
@@ -87,13 +89,52 @@ class _PasswordScreenState extends State<PasswordScreen> {
         Navigator.pop(context);
       });
     }
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => HomeNav(),
-        // AdminHomeScreen(),
-      ),
-    );
+  }
+
+  Future<void> resetPassword(String email) async {
+    Navigator.of(context).pop(); // close confirm dialog
+
+    try {
+      showLoadingDialog(context);
+
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email.trim());
+
+      if (!mounted) return;
+
+      Navigator.pop(context); // close loading
+
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+            title: Text("Password reset email sent"),
+            content: Text("Check spam folder if you don’t see the email"),
+            actions: [
+              ButtonWidget(
+                text: "Okey",
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                color: Color(0xFF004CFF),
+                height: 50.h,
+                width: 400.w,
+              ),
+            ],
+          );
+        },
+      );
+    } catch (e) {
+      if (!mounted) return;
+
+      Navigator.pop(context);
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Error: $e")));
+    }
   }
 
   @override
@@ -136,8 +177,15 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   right: 140,
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
-                    radius: 40,
-                    child: Image.network(widget.imageUrl),
+                    radius: 50,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(60.r),
+                      child: Image.network(
+                        widget.imageUrl,
+                        width: 120.w,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
                 Positioned(
@@ -145,12 +193,12 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
                   right: 80,
                   child: Text(
-                    "Hello, ",
+                    "Hello, ${widget.userName}",
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Positioned(
-                  top: 340,
+                  top: 320,
 
                   right: 90,
                   child: Text(
@@ -182,7 +230,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   height: 61,
                   text: 'Next',
                   color: Color(0xFF004CFF),
-                  onPressed: () async {},
+                  onPressed: () async {
+                    handlelogin();
+                  },
                 ),
 
                 SizedBox(height: 50),
@@ -192,7 +242,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Not you?",
+                        "Forget password",
                         style: TextStyle(
                           fontSize: 19,
                           fontWeight: FontWeight.normal,
@@ -201,8 +251,53 @@ class _PasswordScreenState extends State<PasswordScreen> {
                       SizedBox(width: 10),
                       GestureDetector(
                         onTap: () {
-                          Navigator.popAndPushNamed(context, '/forgetpassword');
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16.r),
+                                ),
+                                title: Text("Forget Password"),
+                                content: Text(
+                                  "is this your email? ${widget.email}",
+                                ),
+                                actions: [
+                                  ButtonWidget(
+                                    text: "No",
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => LoginScreen(),
+                                        ),
+                                      ); // close dialog
+                                    },
+                                    color: Colors.red,
+                                    height: 30.h,
+                                    width: 100.w,
+                                  ),
+                                  ButtonWidget(
+                                    text: "Yes",
+                                    onPressed: () {
+                                      resetPassword(widget.email);
+                                    },
+                                    color: Colors.green,
+                                    height: 30.h,
+                                    width: 100.w,
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         },
+
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (_) => ForgetpasswordScreen(),
+                        //   ),
+                        // );
                         child: Image.asset(
                           'assets/images/bluenav-btn.png',
                           width: 30,
