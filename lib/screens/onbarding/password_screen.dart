@@ -1,13 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/admin_side/admin_home_screen.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
+import 'package:shoppe/screens/common_widgets/loading_dailog.dart';
 import 'package:shoppe/screens/common_widgets/password_box.dart';
 import 'package:shoppe/screens/user_side/home/home_nav.dart';
 
 class PasswordScreen extends StatefulWidget {
-  const PasswordScreen({super.key});
+  final String email;
+  final String imageUrl;
+  final String userName;
+  const PasswordScreen({
+    super.key,
+    required this.email,
+    required this.imageUrl,
+    required this.userName,
+  });
 
   @override
   State<PasswordScreen> createState() => _PasswordScreenState();
@@ -30,6 +40,62 @@ class _PasswordScreenState extends State<PasswordScreen> {
     return isObscure ? '●' : pin[index];
   }
 
+  Future<void> login() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: widget.email,
+      password: passwordControllers.join().trim(),
+    );
+  }
+
+  void showErrorDialog(String message, VoidCallback onRetry) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Error"),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Cancel"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                onRetry();
+              },
+              child: const Text("Retry"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> handlelogin() async {
+    try {
+      showLoadingDialog(context);
+      await login();
+      if (!mounted) return;
+      Navigator.pop(context);
+      Navigator.push(context, MaterialPageRoute(builder: (_) => HomeNav()));
+    } catch (e) {
+      if (!mounted) return;
+
+      Navigator.pop(context);
+      showErrorDialog("Signup failed.\n${e.toString()}", () {
+        Navigator.pop(context);
+      });
+    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => HomeNav(),
+        // AdminHomeScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +116,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
                     child: CircleAvatar(
                       radius: 200,
+
                       backgroundColor: Color(0xFFD9E4FF),
                     ),
                   ),
@@ -70,7 +137,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 40,
-                    child: Image.asset('assets/images/profileimage.png'),
+                    child: Image.network(widget.imageUrl),
                   ),
                 ),
                 Positioned(
@@ -78,7 +145,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
                   right: 80,
                   child: Text(
-                    "Hello, Romina!!",
+                    "Hello, ",
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -115,15 +182,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   height: 61,
                   text: 'Next',
                   color: Color(0xFF004CFF),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => HomeNav(),
-                        // AdminHomeScreen(),
-                      ),
-                    );
-                  },
+                  onPressed: () async {},
                 ),
 
                 SizedBox(height: 50),
