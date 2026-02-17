@@ -7,18 +7,14 @@ import 'package:shoppe/screens/user_side/home/home_screen.dart';
 import 'package:shoppe/screens/onbarding/createaccount_screen.dart';
 import 'package:shoppe/screens/onbarding/forgetpassword_screen.dart';
 import 'package:shoppe/screens/onbarding/login_screen.dart';
-import 'package:shoppe/screens/onbarding/password_screen.dart';
 import 'package:shoppe/screens/onbarding/recover_password.dart';
 import 'package:shoppe/screens/onbarding/resetpassword_screen.dart';
 import 'package:shoppe/screens/onbarding/splash_screen.dart';
 import 'package:shoppe/screens/onbarding/start.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-   
-    options: DefaultFirebaseOptions.currentPlatform,
-);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
     ScreenUtilInit(
       designSize: const Size(440, 956),
@@ -61,7 +57,6 @@ class MyApp extends StatelessWidget {
         '/start': (context) => const Start(),
         '/createaccount': (context) => const CreateaccountScreen(),
         '/login': (context) => const LoginScreen(),
-        '/password': (context) => const PasswordScreen(),
         '/forgetpassword': (context) => const ForgetpasswordScreen(),
         '/recoverpassword': (context) => const RecoverPassword(),
         '/resetpassword': (context) => const ResetpasswordScreen(),
