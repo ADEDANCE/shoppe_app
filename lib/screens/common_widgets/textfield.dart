@@ -4,6 +4,8 @@ class Textfield extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final Color? fillColor;
+  final Function(String)? onChanged;
+
   // final Widget?  suffixIcon;
   final bool issuffixIcon;
   const Textfield({
@@ -12,6 +14,7 @@ class Textfield extends StatefulWidget {
     required this.hintText,
     this.fillColor,
     this.issuffixIcon = false,
+    this.onChanged,
   });
 
   @override
@@ -24,6 +27,7 @@ class _TextfieldState extends State<Textfield> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
+      onChanged: widget.onChanged,
       obscureText: widget.issuffixIcon ? _isObscure : false,
       decoration: InputDecoration(
         hintText: widget.hintText,
