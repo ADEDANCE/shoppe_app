@@ -5,6 +5,7 @@ class Textfield extends StatefulWidget {
   final String hintText;
   final Color? fillColor;
   final Function(String)? onChanged;
+  final int? maxLength;
 
   // final Widget?  suffixIcon;
   final bool issuffixIcon;
@@ -15,6 +16,7 @@ class Textfield extends StatefulWidget {
     this.fillColor,
     this.issuffixIcon = false,
     this.onChanged,
+    this.maxLength,
   });
 
   @override
@@ -27,6 +29,7 @@ class _TextfieldState extends State<Textfield> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
+      maxLength: widget.maxLength,
       onChanged: widget.onChanged,
       obscureText: widget.issuffixIcon ? _isObscure : false,
       decoration: InputDecoration(
