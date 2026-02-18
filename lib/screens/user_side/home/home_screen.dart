@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
       title: 'New Arrivals',
       subtitle: 'Premium Sneakers',
       description: 'Up to 30% off today',
-      cardcolor: Color(0xFFF1B11C),
+      cardcolor: Color(0xFF004CFF),
       imagepath: 'assets/images/carouselimg1.png',
       circlecolor1: Color(0xFFFFD471),
       circlecolor2: Color(0xFFFFD471),
@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       title: 'New Arrivals',
       subtitle: 'Premium Sneakers',
       description: 'Up to 30% off today',
-      cardcolor: Color(0xFFF1B11C),
+      cardcolor: Color(0xFF004CFF),
       imagepath: 'assets/images/carouselimg2.png',
       circlecolor1: Color(0xFFFFD471),
       circlecolor2: Color(0xFFFFD471),
@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       title: 'New Arrivals',
       subtitle: 'Premium Sneakers',
       description: 'Up to 30% off today',
-      cardcolor: Color(0xFFF1B11C),
+      cardcolor: Color(0xFF004CFF),
       imagepath: 'assets/images/carouselimg3.png',
       circlecolor1: Color(0xFFFFD471),
       circlecolor2: Color(0xFFFFD471),
@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       title: 'New Arrivals',
       subtitle: 'Premium Sneakers',
       description: 'Up to 30% off today',
-      cardcolor: Color(0xFFF1B11C),
+      cardcolor: Color(0xFF004CFF),
       imagepath: 'assets/images/carouselimg4.png',
       circlecolor1: Color(0xFFFFD471),
       circlecolor2: Color(0xFFFFD471),
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
       title: 'New Arrivals',
       subtitle: 'Premium Sneakers',
       description: 'Up to 30% off today',
-      cardcolor: Color(0xFFF1B11C),
+      cardcolor: Color(0xFF004CFF),
       imagepath: 'assets/images/carouselimg5.jpg',
       circlecolor1: Color(0xFFFFD471),
       circlecolor2: Color(0xFFFFD471),
@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
       title: 'New Arrivals',
       subtitle: 'Premium Sneakers',
       description: 'Up to 30% off today',
-      cardcolor: Color(0xFFF1B11C),
+      cardcolor: Color(0xFF004CFF),
       imagepath: 'assets/images/carouselimg6.png',
       circlecolor1: Color(0xFFFFD471),
       circlecolor2: Color(0xFFFFD471),
@@ -181,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 8,
                   decoration: BoxDecoration(
                     color: currentIndex == index
-                        ? Colors.blue
+                        ? Color(0xFF004CFF)
                         : Colors.grey.shade400,
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -385,101 +385,101 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 30.h),
 
-            SizedBox(
-              height: 200, // REQUIRED for horizontal scroll
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                itemCount: newitems.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 14),
-                    child: newitems[index],
-                  );
-                },
-              ),
-            ),
-            SizedBox(height: 30.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Flash Sale',
-                  style: TextStyle(
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF000000),
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'See All',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF000000),
-                      ),
-                    ),
-                    SizedBox(width: 20.w),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Image.asset(
-                        'assets/images/bluenav-btn.png',
-                        width: 30.w,
-                        height: 30.h,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 10.h),
-            Row(
-              children: [
-                ProducrCard(
-                  width: 100,
-                  onTap: () {},
-                  imagepath: 'assets/images/Clothinggrid2.png',
-                ),
-                SizedBox(width: 10.w),
-                ProducrCard(
-                  width: 100,
-                  onTap: () {},
-                  imagepath: 'assets/images/Clothinggrid1.png',
-                ),
-                SizedBox(width: 10.w),
-                ProducrCard(
-                  width: 100,
-                  onTap: () {},
-                  imagepath: 'assets/images/Clothinggrid4.png',
-                ),
-                SizedBox(width: 10.w),
-              ],
-            ),
-            SizedBox(height: 30.h),
-            Row(
-              children: [
-                ProducrCard(
-                  width: 100,
-                  onTap: () {},
-                  imagepath: 'assets/images/Clothinggrid1.png',
-                ),
-                SizedBox(width: 10.w),
-                ProducrCard(
-                  width: 100,
-                  onTap: () {},
-                  imagepath: 'assets/images/Clothinggrid4.png',
-                ),
-                SizedBox(width: 10.w),
-                ProducrCard(
-                  width: 100,
-                  onTap: () {},
-                  imagepath: 'assets/images/Clothinggrid3.png',
-                ),
-                SizedBox(width: 10.w),
-              ],
-            ),
+            // SizedBox(
+            //   height: 200, // REQUIRED for horizontal scroll
+            //   child: ListView.builder(
+            //     scrollDirection: Axis.horizontal,
+            //     physics: const BouncingScrollPhysics(),
+            //     itemCount: newitems.length,
+            //     itemBuilder: (context, index) {
+            //       return Padding(
+            //         padding: const EdgeInsets.only(right: 14),
+            //         child: newitems[index],
+            //       );
+            //     },
+            //   ),
+            // ),
+            // SizedBox(height: 30.h),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(
+            //       'Flash Sale',
+            //       style: TextStyle(
+            //         fontSize: 21,
+            //         fontWeight: FontWeight.bold,
+            //         color: Color(0xFF000000),
+            //       ),
+            //     ),
+            //     Row(
+            //       children: [
+            //         Text(
+            //           'See All',
+            //           style: TextStyle(
+            //             fontSize: 15,
+            //             fontWeight: FontWeight.bold,
+            //             color: Color(0xFF000000),
+            //           ),
+            //         ),
+            //         SizedBox(width: 20.w),
+            //         GestureDetector(
+            //           onTap: () {},
+            //           child: Image.asset(
+            //             'assets/images/bluenav-btn.png',
+            //             width: 30.w,
+            //             height: 30.h,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ],
+            // ),
+            // SizedBox(height: 10.h),
+            // Row(
+            //   children: [
+            //     ProducrCard(
+            //       width: 100,
+            //       onTap: () {},
+            //       imagepath: 'assets/images/Clothinggrid2.png',
+            //     ),
+            //     SizedBox(width: 10.w),
+            //     ProducrCard(
+            //       width: 100,
+            //       onTap: () {},
+            //       imagepath: 'assets/images/Clothinggrid1.png',
+            //     ),
+            //     SizedBox(width: 10.w),
+            //     ProducrCard(
+            //       width: 100,
+            //       onTap: () {},
+            //       imagepath: 'assets/images/Clothinggrid4.png',
+            //     ),
+            //     SizedBox(width: 10.w),
+            //   ],
+            // ),
+            // SizedBox(height: 30.h),
+            // Row(
+            //   children: [
+            //     ProducrCard(
+            //       width: 100,
+            //       onTap: () {},
+            //       imagepath: 'assets/images/Clothinggrid1.png',
+            //     ),
+            //     SizedBox(width: 10.w),
+            //     ProducrCard(
+            //       width: 100,
+            //       onTap: () {},
+            //       imagepath: 'assets/images/Clothinggrid4.png',
+            //     ),
+            //     SizedBox(width: 10.w),
+            //     ProducrCard(
+            //       width: 100,
+            //       onTap: () {},
+            //       imagepath: 'assets/images/Clothinggrid3.png',
+            //     ),
+            //     SizedBox(width: 10.w),
+            //   ],
+            // ),
           ],
         ),
       ),
