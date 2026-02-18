@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/delivery_type.dart';
+import 'package:shoppe/screens/common_widgets/loading_dailog.dart';
 import 'package:shoppe/screens/common_widgets/quantity_button.dart';
 import 'package:shoppe/screens/common_widgets/review_widget.dart';
 import 'package:shoppe/screens/user_side/services/product_categories.dart';
@@ -11,10 +13,12 @@ int selectedIndex = 1;
 int quantity = 1;
 int selecteddelivery = 0;
 bool isFavorite = false;
+Map<String, dynamic>? productData;
 
 class ProductDetails extends StatefulWidget {
   final String productId;
-  const ProductDetails({super.key, required this.productId});
+  final Map<String, dynamic>? product;
+  const ProductDetails({super.key, required this.productId, this.product});
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
@@ -22,6 +26,76 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   final FirestoreService service = FirestoreService();
+
+  Future<void> addToCart(String productId, Map<String, dynamic> product) async {
+    try {
+      showLoadingDialog(context);
+      final uid = FirebaseAuth.instance.currentUser!.uid;
+
+      final cartRef = FirebaseFirestore.instance
+          .collection("users")
+          .doc(uid)
+          .collection("cart")
+          .doc(productId);
+
+      final doc = await cartRef.get();
+
+      if (doc.exists) {
+        await cartRef.update({"quantity": FieldValue.increment(1)});
+      } else {
+        await cartRef.set({
+          ...product,
+          "quantity": 1,
+          "createdAt": FieldValue.serverTimestamp(),
+        });
+        Navigator.pop(context);
+        return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("Error"),
+              content: Text("succesul message"),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text("Cancel"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Retry"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (e) {
+      return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Error"),
+            content: Text("message"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Cancel"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("Retry"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   Widget _selectableButton(String text, int index) {
     final bool isSelected = selectedIndex == index;
     return ElevatedButton(
@@ -66,6 +140,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     final data =
                         snapshot.data!.data()
                             as Map<String, dynamic>; // <- map of product
+                    productData = data;
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -262,7 +337,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                     width: 128.w,
                     height: 58.h,
                     text: "Add to cart",
-                    onPressed: () {},
+                    onPressed: () {
+                      if (productData != null) {
+                        addToCart(widget.productId, productData!);
+                      }
+                    },
                     color: Color(0XFF000000),
                   ),
                   ButtonWidget(
