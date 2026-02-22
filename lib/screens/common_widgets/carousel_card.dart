@@ -55,13 +55,17 @@ class CarouselCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                       SizedBox(height: 6),
                       Text(
                         subtitle,
                         // 'Premium Sneakers',
-                        style: TextStyle(fontSize: 14, color: Colors.grey),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: const Color.fromARGB(255, 253, 230, 230),
+                        ),
                       ),
                       SizedBox(height: 6),
                       Text(
@@ -69,7 +73,7 @@ class CarouselCard extends StatelessWidget {
                         //  'Up to 30% off today',
                         style: TextStyle(
                           fontSize: 13,
-                          color: Colors.blue,
+                          color: Colors.white,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
