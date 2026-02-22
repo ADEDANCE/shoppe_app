@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoppe/screens/admin_side/admin_home_screen.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/loading_dailog.dart';
 import 'package:shoppe/screens/common_widgets/password_box.dart';
@@ -78,9 +80,24 @@ class _PasswordScreenState extends State<PasswordScreen> {
     try {
       showLoadingDialog(context);
       await login();
+      final uid = FirebaseAuth.instance.currentUser!.uid;
+      // to check user role
+      final userDoc = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(uid)
+          .get();
+
+      final role = userDoc['role'];
       if (!mounted) return;
       Navigator.pop(context);
-      Navigator.push(context, MaterialPageRoute(builder: (_) => HomeNav()));
+      if (role == "admin") {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => AdminHomeScreen()),
+        );
+      } else {
+        Navigator.push(context, MaterialPageRoute(builder: (_) => HomeNav()));
+      }
     } catch (e) {
       if (!mounted) return;
 

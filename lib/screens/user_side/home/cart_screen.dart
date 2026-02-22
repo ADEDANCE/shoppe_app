@@ -22,6 +22,15 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> removeFromCart(String productId) async {
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(uid)
+          .collection("cart")
+          .doc(productId)
+          .delete();
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -101,10 +110,39 @@ class _CartScreenState extends State<CartScreen> {
                             itemBuilder: (context, index) {
                               return Row(
                                 children: [
-                                  ProducrCard(
-                                    width: 160.w,
-                                    onTap: () {},
-                                    imagepath: cart[index]['image'],
+                                  Stack(
+                                    children: [
+                                      ProducrCard(
+                                        width: 160.w,
+                                        onTap: () {},
+                                        imagepath: cart[index]['image'],
+                                      ),
+                                      Positioned(
+                                        top: 0,
+                                        left: 90,
+                                        child: Container(
+                                          width: 45.w,
+                                          height: 40.h,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(
+                                              20.r,
+                                            ),
+                                          ),
+                                          child: IconButton(
+                                            onPressed: () {
+                                              final docId = cart[index].id;
+
+                                              removeFromCart(docId);
+                                            },
+                                            icon: Icon(
+                                              Icons.delete_outline,
+                                              color: Colors.redAccent,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   SizedBox(width: 16.w),
                                   Expanded(

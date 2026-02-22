@@ -1,0 +1,13 @@
+flutter_native_splash:
+  color: "#FFFFFF"
+  color_dark: "#272727"
+  image: assets/images/shopeelogo.png
+  image_dark: assets/images/shopeelogoblack.png
+
+  android_12:
+    color: "#FFFFFF"
+    color_dark: "#272727"
+    image: assets/images/shopeelogoblack.png
+    image_dark:   assets/images/shopeelogo.png
+  
+  web: false

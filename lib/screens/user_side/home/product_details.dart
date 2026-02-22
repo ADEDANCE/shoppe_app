@@ -48,23 +48,18 @@ class _ProductDetailsState extends State<ProductDetails> {
           "quantity": 1,
           "createdAt": FieldValue.serverTimestamp(),
         });
+        if (!mounted) return;
         Navigator.pop(context);
         return showDialog(
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: const Text("Error"),
-              content: Text("succesul message"),
+              title: const Text("success message"),
+              content: Text("item succefully added to cart"),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text("Cancel"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text("Retry"),
+                  child: const Text("OKay"),
                 ),
               ],
             );
@@ -72,6 +67,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         );
       }
     } catch (e) {
+      if (!mounted) return;
       return showDialog(
         context: context,
         builder: (context) {

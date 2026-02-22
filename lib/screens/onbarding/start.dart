@@ -25,7 +25,7 @@ class _StartState extends State<Start> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Image.asset('assets/images/circlelogo.png'),
+                    Image.asset('assets/images/shopeelogo.png'),
                     //Image.asset(),
                     Text(
                       "Shoppe",
