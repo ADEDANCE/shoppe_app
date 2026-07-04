@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:shoppe/screens/common_widgets/product_card.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoppe/screens/common_widgets/product_card.dart';
 
 class WishlistScreen extends StatefulWidget {
   const WishlistScreen({super.key});
@@ -13,149 +13,42 @@ class _WishlistScreenState extends State<WishlistScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: const Text("Wishlist"),
+        centerTitle: true,
+      ),
       body: SafeArea(
-        child: Center(
-          child: Text(
-            'Coming Soon!',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 35,
-              fontWeight: FontWeight.bold,
-            ),
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ProducrCard(
+                    width: 185.w,
+                    onTap: () {},
+                    imagepath: "assets/images/shoes.png",
+                    description: "Lorem ipsum dolor sit  amet consectetur..",
+                  ),
+
+                  ProducrCard(
+                    width: 185.w,
+                    onTap: () {},
+                    imagepath: "assets/images/shoes.png",
+                    description: "Lorem ipsum dolor sit  amet consectetur..",
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
-        //  Padding(
-        //   padding: EdgeInsets.all(16),
-        //   child: Column(
-        //     children: [
-        //       Row(
-        //         children: [
-        //           ProducrCard(
-        //             width: 160.w,
-        //             onTap: () {},
-        //             imagepath: "assets/images/shoes.png",
-        //           ),
-        //           SizedBox(width: 16.w),
-        //           Expanded(
-        //             child: Column(
-        //               children: [
-        //                 Align(
-        //                   alignment: Alignment.centerLeft,
-        //                   child: Text(
-        //                     "Lorem ipsum dolor sit  amet consectetur..",
-        //                     style: TextStyle(fontSize: 15),
-        //                   ),
-        //                 ),
-
-        //                 Row(
-        //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //                   children: [
-        //                     Text(
-        //                       "\$${1700}",
-        //                       style: TextStyle(
-        //                         fontSize: 20.sp,
-        //                         fontWeight: FontWeight.bold,
-        //                       ),
-        //                     ),
-        //                     Image.asset(
-        //                       "assets/images/shoes.png",
-        //                       width: 20,
-        //                       height: 20,
-        //                     ),
-        //                   ],
-        //                 ),
-        //               ],
-        //             ),
-        //           ),
-        //         ],
-        //       ),
-        //       SizedBox(height: 10),
-        //       Row(
-        //         children: [
-        //           ProducrCard(
-        //             width: 160.w,
-        //             onTap: () {},
-        //             imagepath: "assets/images/shoes.png",
-        //           ),
-        //           SizedBox(width: 16.w),
-        //           Expanded(
-        //             child: Column(
-        //               children: [
-        //                 Align(
-        //                   alignment: Alignment.centerLeft,
-        //                   child: Text(
-        //                     "Lorem ipsum dolor sit  amet consectetur..",
-        //                     style: TextStyle(fontSize: 15),
-        //                   ),
-        //                 ),
-
-        //                 Row(
-        //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //                   children: [
-        //                     Text(
-        //                       "\$${1700}",
-        //                       style: TextStyle(
-        //                         fontSize: 20.sp,
-        //                         fontWeight: FontWeight.bold,
-        //                       ),
-        //                     ),
-        //                     Image.asset(
-        //                       "assets/images/shoes.png",
-        //                       width: 20,
-        //                       height: 20,
-        //                     ),
-        //                   ],
-        //                 ),
-        //               ],
-        //             ),
-        //           ),
-        //         ],
-        //       ),
-        //       SizedBox(height: 10),
-        //       Row(
-        //         children: [
-        //           ProducrCard(
-        //             width: 160.w,
-        //             onTap: () {},
-        //             imagepath: "assets/images/shoes.png",
-        //           ),
-        //           SizedBox(width: 16.w),
-        //           Expanded(
-        //             child: Column(
-        //               children: [
-        //                 Align(
-        //                   alignment: Alignment.centerLeft,
-        //                   child: Text(
-        //                     "Lorem ipsum dolor sit  amet consectetur..",
-        //                     style: TextStyle(fontSize: 15),
-        //                   ),
-        //                 ),
-
-        //                 Row(
-        //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //                   children: [
-        //                     Text(
-        //                       "\$${1700}",
-        //                       style: TextStyle(
-        //                         fontSize: 20.sp,
-        //                         fontWeight: FontWeight.bold,
-        //                       ),
-        //                     ),
-        //                     Image.asset(
-        //                       "assets/images/shoes.png",
-        //                       width: 20,
-        //                       height: 20,
-        //                     ),
-        //                   ],
-        //                 ),
-        //               ],
-        //             ),
-        //           ),
-        //         ],
-        //       ),
-        //     ],
-        //   ),
-        // ),
       ),
     );
   }
