@@ -3,8 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/delivery_type.dart';
 import 'package:shoppe/screens/common_widgets/info_container.dart';
-import 'package:shoppe/screens/common_widgets/product_circle.dart';
-import 'package:shoppe/screens/common_widgets/purchase_index.dart';
+
 import 'package:shoppe/screens/user_side/home/ordertracking_screen.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -227,165 +226,59 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         onPressed: () {},
                       ),
                       SizedBox(height: 10.h),
-                      InfoContainer(
-                        title: "Shipping Address",
-                        details:
-                            "26, Duong So 2, Thao Dien Ward, An Phu, District 2, Ho Chi Minh city",
-                        onPressed: () {},
-                      ),
-                      SizedBox(height: 15.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                "Cart",
+
+                      Container(
+                        padding: EdgeInsets.all(13),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16.r),
+                          color: Colors.white,
+                        ),
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Shipping Options",
                                 style: TextStyle(
                                   fontSize: 25.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(width: 10.w),
-                              PurchaseIndex(),
-                            ],
-                          ),
-                          SizedBox(height: 10.h),
-                          ButtonWidget(
-                            text: "Add Voucher",
-                            textcolor: Color(0xFF004BFE),
-                            onPressed: () {},
-                            color: Color(0xFFFFFFFF),
-                            height: 40.h,
-                            width: 120.w,
-                            bordercolor: Color(0xFF004BFE),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Stack(
-                                children: [
-                                  ProductCircle(
-                                    backgroundradius: 40,
-                                    radius: 30,
-                                    imagepath: "assets/images/shoes.png",
-                                    onTap: () {},
-                                  ),
-                                  Positioned(
-                                    left: 60,
-                                    top: 20,
-                                    child: PurchaseIndex(),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(width: 5.w),
-                              SizedBox(
-                                width: 200.w,
-                                child: Text(
-                                  "Lorem ipsum dolor sit amet consectetur.",
-                                  style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          Text(
-                            "\$${1700}",
-                            style: TextStyle(
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.bold,
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Stack(
-                                children: [
-                                  ProductCircle(
-                                    backgroundradius: 40,
-                                    radius: 30,
-                                    imagepath: "assets/images/Bag2.png",
-                                    onTap: () {},
-                                  ),
-                                  Positioned(
-                                    left: 60,
-                                    top: 20,
-                                    child: PurchaseIndex(),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(width: 5.w),
-                              SizedBox(
-                                width: 200.w,
-                                child: Text(
-                                  "Lorem ipsum dolor sit amet consectetur.",
-                                  style: TextStyle(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
 
-                          Text(
-                            "\$${1700}",
-                            style: TextStyle(
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.bold,
+                            SizedBox(height: 10.h),
+
+                            DeliveryType(
+                              isdeliverySelected: selecteddelivery == 0,
+                              onTap: () {
+                                setState(() {
+                                  selecteddelivery = 0;
+                                });
+                              },
+
+                              title: "Standard",
+                              duration: "5-7 days",
+                              price: "\$3,00",
                             ),
-                          ),
-                        ],
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Shipping Options",
-                          style: TextStyle(
-                            fontSize: 25.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
+
+                            SizedBox(height: 10.h),
+                            DeliveryType(
+                              isdeliverySelected: selecteddelivery == 1,
+                              onTap: () {
+                                setState(() {
+                                  selecteddelivery = 1;
+                                });
+                              },
+
+                              title: "Express",
+                              duration: "1-2 days",
+                              price: "\$12,00",
+                            ),
+                          ],
                         ),
                       ),
 
-                      DeliveryType(
-                        isdeliverySelected: selecteddelivery == 0,
-                        onTap: () {
-                          setState(() {
-                            selecteddelivery = 0;
-                          });
-                        },
-
-                        title: "Standard",
-                        duration: "5-7 days",
-                        price: "\$3,00",
-                      ),
-                      DeliveryType(
-                        isdeliverySelected: selecteddelivery == 1,
-                        onTap: () {
-                          setState(() {
-                            selecteddelivery = 1;
-                          });
-                        },
-
-                        title: "Express",
-                        duration: "1-2 days",
-                        price: "\$12,00",
-                      ),
-                      SizedBox(height: 15.h),
+                      SizedBox(height: 25.h),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -417,6 +310,93 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                        ),
+                      ),
+
+                      SizedBox(height: 20.h),
+                      Container(
+                        padding: EdgeInsets.all(13),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16.r),
+                          color: Colors.white,
+                        ),
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Order summary",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            SizedBox(height: 10.h),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Subtotal",
+                                  style: TextStyle(color: Colors.black54),
+                                ),
+
+                                Text(
+                                  "627",
+                                  style: TextStyle(color: Colors.black12),
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(height: 10.h),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Shipping",
+                                  style: TextStyle(color: Colors.black54),
+                                ),
+
+                                Text(
+                                  "Free",
+                                  style: TextStyle(color: Colors.black54),
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(height: 10.h),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Discount",
+                                  style: TextStyle(color: Colors.black54),
+                                ),
+
+                                Text(
+                                  "0",
+                                  style: TextStyle(color: Colors.green),
+                                ),
+                              ],
+                            ),
+
+                            Divider(),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Total",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+
+                                Text(
+                                  "627",
+                                  style: TextStyle(color: Colors.blueAccent),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ],
