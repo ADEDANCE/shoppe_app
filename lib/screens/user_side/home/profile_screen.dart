@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoppe/screens/common_widgets/profile_detail.dart';
+import 'package:shoppe/theme/app_colors.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:shoppe/screens/common_widgets/product_circle.dart';
 // import 'package:shoppe/screens/common_widgets/selection_button.dart';
@@ -15,229 +18,204 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Coming Soon!',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 35,
-          fontWeight: FontWeight.bold,
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Profile",
+                      style: TextStyle(
+                        fontSize: 25.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 30.h),
+                  Container(
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF004CFF),
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: Color.fromARGB(
+                                  255,
+                                  77,
+                                  105,
+                                  170,
+                                ),
+                                radius: 50,
+                                child: Image.asset(
+                                  "assets/images/profileimage.png",
+                                ),
+                              ),
+
+                              SizedBox(width: 20.w),
+
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Alex Morgan",
+
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    "alex.morgan@icloud.com",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(height: 15.h),
+
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 10.h,
+                            horizontal: 90.w,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 64, 118, 243),
+                            borderRadius: BorderRadius.circular(20.r),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    "24",
+
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Orders",
+                                    style: TextStyle(color: Colors.white54),
+                                  ),
+                                ],
+                              ),
+
+                              Container(
+                                width: 1,
+                                height: 40,
+                                color: Colors.white54,
+                              ),
+
+                              Column(
+                                children: [
+                                  Text(
+                                    "24",
+
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Wishlist",
+                                    style: TextStyle(color: Colors.white54),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: 25.h),
+
+                  Container(
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: AppColors.secondaryWhite,
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ProfileDetail(
+                          icon: Icons.card_giftcard_rounded,
+                          title: "My orders",
+                          subtitle: "12 active",
+                        ),
+                        SizedBox(height: 15.h),
+                        ProfileDetail(
+                          icon: Icons.heart_broken_rounded,
+                          title: "Wishlist",
+                          subtitle: "18 items",
+                        ),
+                        SizedBox(height: 15.h),
+                        ProfileDetail(
+                          icon: Icons.location_on_outlined,
+                          title: "Saved addresses",
+                          subtitle: "1 addresses",
+                        ),
+
+                        SizedBox(height: 15.h),
+                        ProfileDetail(
+                          icon: Icons.payment,
+                          title: "Payment methods",
+                          subtitle: "visa",
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: 25.h),
+
+                  Container(
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: AppColors.secondaryWhite,
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ProfileDetail(icon: Icons.settings, title: "Settings"),
+                        SizedBox(height: 15.h),
+                        ProfileDetail(
+                          icon: Icons.heart_broken_rounded,
+                          title: "Log out",
+                          circlecolor: const Color.fromARGB(255, 247, 162, 155),
+                          iconcolor: Colors.red,
+                          textcolor: Colors.red,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
-    //  Padding(
-    //   padding: EdgeInsets.all(16),
-    //   child: Expanded(
-    //     child: SingleChildScrollView(
-    //       child: Column(
-    //         mainAxisSize: MainAxisSize.min,
-    //         children: [
-    //           SizedBox(height: 30.h),
-    //           Row(
-    //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //             children: [
-    //               Row(
-    //                 children: [
-    //                   CircleAvatar(
-    //                     radius: 25,
-    //                     child: CircleAvatar(
-    //                       radius: 20, // image size
-    //                       backgroundImage: AssetImage(
-    //                         'assets/images/Clothinggrid1.png',
-    //                       ),
-    //                     ),
-    //                   ),
-    //                   SizedBox(width: 10.h),
-    //                   ElevatedButton(
-    //                     onPressed: () {},
-    //                     style: ElevatedButton.styleFrom(
-    //                       backgroundColor: Color(0xFF004CFF),
-    //                       minimumSize: Size(90, 30),
-    //                       shape: RoundedRectangleBorder(
-    //                         borderRadius: BorderRadius.circular(50),
-    //                       ),
-    //                     ),
-    // child: Text(
-    //   'My Activity',
-    //   style: TextStyle(
-    //     color: Colors.white,
-    //     fontSize: 15,
-    //     fontWeight: FontWeight.normal,
-    //   ),
-    // ),
-    //                   ),
-    //                 ],
-    //               ),
-    //               Row(
-    //                 children: [
-    //                   GestureDetector(
-    //                     onTap: () {},
-    //                     child: CircleAvatar(
-    //                       radius: 15,
-    //                       child: Image.asset(
-    //                         'assets/images/Clothinggrid1.png',
-    //                         width: 15.w,
-    //                         height: 15.h,
-    //                       ),
-    //                     ),
-    //                   ),
-    //                   SizedBox(width: 15.w),
-    //                   GestureDetector(
-    //                     onTap: () {},
-    //                     child: CircleAvatar(
-    //                       radius: 15,
-    //                       child: Image.asset(
-    //                         'assets/images/Clothinggrid1.png',
-    //                         width: 15.w,
-    //                         height: 15.h,
-    //                       ),
-    //                     ),
-    //                   ),
-    //                   SizedBox(width: 15.w),
-    //                   GestureDetector(
-    //                     onTap: () {
-    //                       Navigator.push(
-    //                         context,
-    //                         MaterialPageRoute(builder: (_) => SettingScreen()),
-    //                       );
-    //                     },
-    //                     child: CircleAvatar(
-    //                       radius: 15,
-    //                       child: Image.asset(
-    //                         'assets/images/Clothinggrid1.png',
-    //                         width: 15.w,
-    //                         height: 15.h,
-    //                       ),
-    //                     ),
-    //                   ),
-    //                 ],
-    //               ),
-    //             ],
-    //           ),
-    //           SizedBox(height: 30.h),
-    //           Align(
-    //             alignment: Alignment.centerLeft,
-    //             child: Text(
-    //               "Hello, Romina!",
-    //               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-    //             ),
-    //           ),
-    //           SizedBox(height: 15.h),
-    //           Container(
-    //             decoration: BoxDecoration(
-    //               color: Color(0xFFF8F8F8),
-    //               borderRadius: BorderRadius.circular(16.r),
-    //             ),
-    //             child: Padding(
-    //               padding: EdgeInsets.all(10),
-    //               child: Column(
-    //                 children: [
-    //                   Align(
-    //                     alignment: Alignment.centerLeft,
-    //                     child: Text(
-    //                       "Announcement",
-    //                       style: TextStyle(
-    //                         fontSize: 14,
-    //                         fontWeight: FontWeight.bold,
-    //                       ),
-    //                     ),
-    //                   ),
-    //                   Align(
-    //                     alignment: Alignment.centerLeft,
-    //                     child: Text(
-    //                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas hendrerit luctus libero ac vulputate.",
-    //                       style: TextStyle(
-    //                         fontSize: 10,
-    //                         fontWeight: FontWeight.normal,
-    //                       ),
-    //                     ),
-    //                   ),
-    //                 ],
-    //               ),
-    //             ),
-    //           ),
-
-    //           SizedBox(height: 30.h),
-    //           Align(
-    //             alignment: Alignment.centerLeft,
-    //             child: Text(
-    //               "Recently viewed",
-    //               style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
-    //             ),
-    //           ),
-    //           SizedBox(height: 30.h),
-    //           Row(
-    //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //             children: [
-    //               ProductCircle(
-    //                 onTap: () {},
-    //                 imagepath: 'assets/images/Clothinggrid1.png',
-    //               ),
-    //               ProductCircle(
-    //                 onTap: () {},
-    //                 imagepath: 'assets/images/Clothinggrid1.png',
-    //               ),
-    //               ProductCircle(
-    //                 onTap: () {},
-    //                 imagepath: 'assets/images/Clothinggrid1.png',
-    //               ),
-    //               ProductCircle(
-    //                 onTap: () {},
-    //                 imagepath: 'assets/images/Clothinggrid1.png',
-    //               ),
-    //               ProductCircle(
-    //                 onTap: () {},
-    //                 imagepath: 'assets/images/Clothinggrid1.png',
-    //               ),
-    //             ],
-    //           ),
-    //           SizedBox(height: 30.h),
-    //           Align(
-    //             alignment: Alignment.centerLeft,
-    //             child: Text(
-    //               "My Orders",
-    //               style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
-    //             ),
-    //           ),
-    //           SizedBox(height: 13.h),
-    //           Row(
-    //             children: [
-    //               SelectionButton(
-    //                 onPressed: () {
-    //                   setState(() {
-    //                     selectedIndex = 0;
-    //                   });
-    //                 },
-    //                 text: 'To Recieve',
-    //                 width: 50.w,
-    //                 height: 25.h,
-    //                 bordercolor: selectedIndex == 0
-    //                     ? Color(0xFF004CFF)
-    //                     : Colors.transparent,
-    //                 color: Color(0xFFF9F9F9),
-    //               ),
-    //               SizedBox(width: 50.w),
-    //               SelectionButton(
-    //                 onPressed: () {
-    //                   setState(() {
-    //                     selectedIndex = 1;
-    //                   });
-    //                 },
-    //                 text: 'To Pay',
-    //                 width: 50.w,
-    //                 height: 25.h,
-    //                 bordercolor: selectedIndex == 1
-    //                     ? Color(0xFF004CFF)
-    //                     : Colors.transparent,
-    //                 color: Color(0xFFF9F9F9),
-    //               ),
-    //             ],
-    //           ),
-    //           //  selectedIndex == 0 ?
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }
