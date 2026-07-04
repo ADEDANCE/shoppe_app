@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoppe/theme/app_colors.dart';
 
 class CategoriesCard extends StatelessWidget {
   final List<String> images;
@@ -16,10 +18,11 @@ class CategoriesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 160,
+      width: 195.w,
       child: InkWell(
         onTap: onTap,
         child: Card(
+          color: AppColors.secondaryWhite,
           margin: EdgeInsets.zero,
           elevation: 4,
           clipBehavior: Clip.antiAlias,
@@ -54,7 +57,7 @@ class CategoriesCard extends StatelessWidget {
                     primary: false,
                     itemCount: images.length.clamp(0, 4), // safety
                     itemBuilder: (context, index) {
-                      return Image.network(images[index], fit: BoxFit.cover) ;
+                      return Image.network(images[index], fit: BoxFit.cover);
                     },
                   ),
                 ),
