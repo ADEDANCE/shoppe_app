@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shoppe/theme/app_colors.dart';
 
 class ProducrCard extends StatelessWidget {
   final double width;
@@ -26,112 +27,109 @@ class ProducrCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: width,
+      decoration: BoxDecoration(
+        color: AppColors.secondaryWhite,
+        borderRadius: BorderRadius.circular(20.r),
+      ),
       child: InkWell(
         onTap: onTap,
         child: Column(
           children: [
-            Card(
-              margin: EdgeInsets.zero,
-              elevation: 4,
-              clipBehavior: Clip.antiAlias,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 8,
-                  left: 5,
-                  right: 5,
-                  top: 4,
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(12),
+                  ),
+                  child: Image.network(
+                    imagepath,
+                    height: 150.h,
+                    width: double.infinity, //  TAKE FULL CARD WIDTH
+                    fit: BoxFit.cover,
+                  ),
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ClipRRect(
-                      borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(12),
-                      ),
-                      child: Image.network(
-                        imagepath,
-                        height: 150.h,
-                        width: double.infinity, //  TAKE FULL CARD WIDTH
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    SizedBox(height: 5.h),
-                    if (likesnumber != null) ...[
+                SizedBox(height: 5.h),
+                if (likesnumber != null) ...[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              if (likesnumber != null)
-                                Text(
-                                  likesnumber!,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF000000),
-                                  ),
-                                ),
-                              SizedBox(width: 3),
-                              // Icon(Icons.favorite, color: Color(0xFF0042E0)),
-                              Icon(likeicon),
-                            ],
-                          ),
-                          if (productstatus != null)
+                          if (likesnumber != null)
                             Text(
-                              productstatus!,
+                              likesnumber!,
                               style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.normal,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
                                 color: Color(0xFF000000),
                               ),
                             ),
+                          SizedBox(width: 3),
+                          // Icon(Icons.favorite, color: Color(0xFF0042E0)),
+                          Icon(likeicon),
                         ],
                       ),
+                      if (productstatus != null)
+                        Text(
+                          productstatus!,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.normal,
+                            color: Color(0xFF000000),
+                          ),
+                        ),
                     ],
-                  ],
-                ),
-              ),
+                  ),
+                ],
+              ],
             ),
-            if (name != null)
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  name!,
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF000000),
-                  ),
-                ),
-              ),
-            if (description != null)
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  description!,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF000000),
-                  ),
-                ),
-              ),
 
-            if (price != null)
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  price!,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.normal,
-                    color: Color(0xFF000000),
-                  ),
+            if (name != null || description != null || price != null)
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    if (name != null)
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          name!,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF000000),
+                          ),
+                        ),
+                      ),
+                    if (description != null)
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          description!,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF000000),
+                          ),
+                        ),
+                      ),
+
+                    if (price != null)
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          price!,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.normal,
+                            color: Color(0xFF000000),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
           ],
