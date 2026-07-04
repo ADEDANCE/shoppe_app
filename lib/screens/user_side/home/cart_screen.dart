@@ -108,80 +108,130 @@ class _CartScreenState extends State<CartScreen> {
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: cart.length,
                             itemBuilder: (context, index) {
-                              return Row(
-                                children: [
-                                  Stack(
-                                    children: [
-                                      ProducrCard(
-                                        width: 160.w,
-                                        onTap: () {},
-                                        imagepath: cart[index]['image'],
-                                      ),
-                                      Positioned(
-                                        top: 0,
-                                        left: 90,
-                                        child: Container(
-                                          width: 45.w,
-                                          height: 40.h,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.circular(
-                                              20.r,
-                                            ),
-                                          ),
-                                          child: IconButton(
-                                            onPressed: () {
-                                              final docId = cart[index].id;
+                              return Container(
+                                padding: EdgeInsets.all(10),
+                                margin: EdgeInsets.only(bottom: 6),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
 
-                                              removeFromCart(docId);
-                                            },
-                                            icon: Icon(
-                                              Icons.delete_outline,
-                                              color: Colors.redAccent,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(width: 16.w),
-                                  Expanded(
-                                    child: Column(
+                                child: Row(
+                                  children: [
+                                    Stack(
                                       children: [
-                                        Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            cart[index]['description']
-                                                .toString(),
-                                            style: const TextStyle(
-                                              fontSize: 15,
-                                            ),
-                                          ),
+                                        ProducrCard(
+                                          width: 160.w,
+                                          onTap: () {},
+                                          imagepath: cart[index]['image'],
                                         ),
-                                        Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            "\$${cart[index]['price']}",
-                                            style: TextStyle(
-                                              fontSize: 20.sp,
-                                              fontWeight: FontWeight.bold,
+                                        Positioned(
+                                          top: 0,
+                                          left: 90,
+                                          child: Container(
+                                            width: 45.w,
+                                            height: 40.h,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(20.r),
                                             ),
-                                          ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            QuantityButton(
-                                              text: '-',
+                                            child: IconButton(
                                               onPressed: () {
                                                 final docId = cart[index].id;
-                                                final currentQty =
-                                                    (cart[index]['quantity']
-                                                            as num)
-                                                        .toInt();
-                                                //should only minus if qty is > 1
-                                                if (currentQty > 1) {
+
+                                                removeFromCart(docId);
+                                              },
+                                              icon: Icon(
+                                                Icons.delete_outline,
+                                                color: Colors.redAccent,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(width: 16.w),
+                                    Expanded(
+                                      child: Column(
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              cart[index]['description']
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              "\$${cart[index]['price']}",
+                                              style: TextStyle(
+                                                fontSize: 20.sp,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              QuantityButton(
+                                                text: '-',
+                                                onPressed: () {
+                                                  final docId = cart[index].id;
+                                                  final currentQty =
+                                                      (cart[index]['quantity']
+                                                              as num)
+                                                          .toInt();
+                                                  //should only minus if qty is > 1
+                                                  if (currentQty > 1) {
+                                                    FirebaseFirestore.instance
+                                                        .collection("users")
+                                                        .doc(uid)
+                                                        .collection("cart")
+                                                        .doc(docId)
+                                                        .update({
+                                                          "quantity":
+                                                              FieldValue.increment(
+                                                                -1,
+                                                              ),
+                                                        });
+                                                  }
+                                                },
+                                              ),
+                                              SizedBox(width: 8.w),
+                                              Container(
+                                                width: 54.w,
+                                                height: 40.h,
+                                                decoration: BoxDecoration(
+                                                  color: const Color(
+                                                    0xFFE5EBFC,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                        10.r,
+                                                      ),
+                                                ),
+                                                child: Center(
+                                                  child: Text(
+                                                    cart[index]['quantity']
+                                                        .toString(),
+                                                    style: const TextStyle(
+                                                      fontSize: 25,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(width: 8.w),
+                                              QuantityButton(
+                                                text: '+',
+                                                onPressed: () {
+                                                  final docId = cart[index].id;
+
                                                   FirebaseFirestore.instance
                                                       .collection("users")
                                                       .doc(uid)
@@ -190,56 +240,18 @@ class _CartScreenState extends State<CartScreen> {
                                                       .update({
                                                         "quantity":
                                                             FieldValue.increment(
-                                                              -1,
+                                                              1,
                                                             ),
                                                       });
-                                                }
-                                              },
-                                            ),
-                                            SizedBox(width: 8.w),
-                                            Container(
-                                              width: 54.w,
-                                              height: 40.h,
-                                              decoration: BoxDecoration(
-                                                color: const Color(0xFFE5EBFC),
-                                                borderRadius:
-                                                    BorderRadius.circular(10.r),
+                                                },
                                               ),
-                                              child: Center(
-                                                child: Text(
-                                                  cart[index]['quantity']
-                                                      .toString(),
-                                                  style: const TextStyle(
-                                                    fontSize: 25,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(width: 8.w),
-                                            QuantityButton(
-                                              text: '+',
-                                              onPressed: () {
-                                                final docId = cart[index].id;
-
-                                                FirebaseFirestore.instance
-                                                    .collection("users")
-                                                    .doc(uid)
-                                                    .collection("cart")
-                                                    .doc(docId)
-                                                    .update({
-                                                      "quantity":
-                                                          FieldValue.increment(
-                                                            1,
-                                                          ),
-                                                    });
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               );
                             },
                           ),
