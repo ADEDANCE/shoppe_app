@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/profile_detail.dart';
+import 'package:shoppe/screens/user_side/home/setting/setting_screen.dart';
 import 'package:shoppe/theme/app_colors.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:shoppe/screens/common_widgets/product_circle.dart';
@@ -161,18 +162,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         ProfileDetail(
                           icon: Icons.card_giftcard_rounded,
+                          onPressed: () {},
                           title: "My orders",
                           subtitle: "12 active",
                         ),
                         SizedBox(height: 15.h),
                         ProfileDetail(
                           icon: Icons.heart_broken_rounded,
+                          onPressed: () {},
                           title: "Wishlist",
                           subtitle: "18 items",
                         ),
                         SizedBox(height: 15.h),
                         ProfileDetail(
                           icon: Icons.location_on_outlined,
+                          onPressed: () {},
                           title: "Saved addresses",
                           subtitle: "1 addresses",
                         ),
@@ -180,6 +184,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         SizedBox(height: 15.h),
                         ProfileDetail(
                           icon: Icons.payment,
+                          onPressed: () {},
                           title: "Payment methods",
                           subtitle: "visa",
                         ),
@@ -198,10 +203,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        ProfileDetail(icon: Icons.settings, title: "Settings"),
+                        ProfileDetail(
+                          icon: Icons.settings,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SettingScreen(),
+                              ),
+                            );
+                          },
+                          title: "Settings",
+                        ),
                         SizedBox(height: 15.h),
                         ProfileDetail(
                           icon: Icons.heart_broken_rounded,
+                          onPressed: () {},
                           title: "Log out",
                           circlecolor: const Color.fromARGB(255, 247, 162, 155),
                           iconcolor: Colors.red,
