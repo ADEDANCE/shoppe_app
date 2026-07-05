@@ -348,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            // SizedBox(height: 30.h),
+            SizedBox(height: 30.h),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //   children: [
@@ -386,7 +386,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // SizedBox(height: 30.h),
 
             // SizedBox(
-            //   height: 200, // REQUIRED for horizontal scroll
+            //  height: 250, // REQUIRED for horizontal scroll
             //   child: ListView.builder(
             //     scrollDirection: Axis.horizontal,
             //     physics: const BouncingScrollPhysics(),
@@ -399,87 +399,87 @@ class _HomeScreenState extends State<HomeScreen> {
             //     },
             //   ),
             // ),
-            SizedBox(height: 30.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Flash Sale',
-                  style: TextStyle(
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF000000),
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'See All',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF000000),
-                      ),
-                    ),
-                    SizedBox(width: 20.w),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Image.asset(
-                        'assets/images/bluenav-btn.png',
-                        width: 30.w,
-                        height: 30.h,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 10.h),
-            Row(
-              children: [
-                ProducrCard(
-                  width: 100,
-                  onTap: () {},
-                  imagepath: 'assets/images/Clothinggrid2.png',
-                ),
-                SizedBox(width: 10.w),
-                ProducrCard(
-                  width: 100,
-                  onTap: () {},
-                  imagepath: 'assets/images/Clothinggrid1.png',
-                ),
-                SizedBox(width: 10.w),
-                ProducrCard(
-                  width: 100,
-                  onTap: () {},
-                  imagepath: 'assets/images/Clothinggrid4.png',
-                ),
-                SizedBox(width: 10.w),
-              ],
-            ),
-            SizedBox(height: 30.h),
-            Row(
-              children: [
-                ProducrCard(
-                  width: 100,
-                  onTap: () {},
-                  imagepath: 'assets/images/Clothinggrid1.png',
-                ),
-                SizedBox(width: 10.w),
-                ProducrCard(
-                  width: 100,
-                  onTap: () {},
-                  imagepath: 'assets/images/Clothinggrid4.png',
-                ),
-                SizedBox(width: 10.w),
-                ProducrCard(
-                  width: 100,
-                  onTap: () {},
-                  imagepath: 'assets/images/Clothinggrid3.png',
-                ),
-                SizedBox(width: 10.w),
-              ],
-            ),
+            // SizedBox(height: 30.h),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(
+            //       'Flash Sale',
+            //       style: TextStyle(
+            //         fontSize: 21,
+            //         fontWeight: FontWeight.bold,
+            //         color: Color(0xFF000000),
+            //       ),
+            //     ),
+            //     Row(
+            //       children: [
+            //         Text(
+            //           'See All',
+            //           style: TextStyle(
+            //             fontSize: 15,
+            //             fontWeight: FontWeight.bold,
+            //             color: Color(0xFF000000),
+            //           ),
+            //         ),
+            //         SizedBox(width: 20.w),
+            //         GestureDetector(
+            //           onTap: () {},
+            //           child: Image.asset(
+            //             'assets/images/bluenav-btn.png',
+            //             width: 30.w,
+            //             height: 30.h,
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ],
+            // ),
+            // SizedBox(height: 10.h),
+            // Row(
+            //   children: [
+            //     ProducrCard(
+            //       width: 100,
+            //       onTap: () {},
+            //       imagepath: 'assets/images/Clothinggrid2.png',
+            //     ),
+            //     SizedBox(width: 10.w),
+            //     ProducrCard(
+            //       width: 100,
+            //       onTap: () {},
+            //       imagepath: 'assets/images/Clothinggrid1.png',
+            //     ),
+            //     SizedBox(width: 10.w),
+            //     ProducrCard(
+            //       width: 100,
+            //       onTap: () {},
+            //       imagepath: 'assets/images/Clothinggrid4.png',
+            //     ),
+            //     SizedBox(width: 10.w),
+            //   ],
+            // ),
+            // SizedBox(height: 30.h),
+            // Row(
+            //   children: [
+            //     ProducrCard(
+            //       width: 100,
+            //       onTap: () {},
+            //       imagepath: 'assets/images/Clothinggrid1.png',
+            //     ),
+            //     SizedBox(width: 10.w),
+            //     ProducrCard(
+            //       width: 100,
+            //       onTap: () {},
+            //       imagepath: 'assets/images/Clothinggrid4.png',
+            //     ),
+            //     SizedBox(width: 10.w),
+            //     ProducrCard(
+            //       width: 100,
+            //       onTap: () {},
+            //       imagepath: 'assets/images/Clothinggrid3.png',
+            //     ),
+            //     SizedBox(width: 10.w),
+            //   ],
+            // ),
           ],
         ),
       ),
