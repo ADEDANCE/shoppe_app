@@ -8,6 +8,7 @@ class ProfileDetail extends StatelessWidget {
   final Color? circlecolor;
   final Color? iconcolor;
   final Color? textcolor;
+  final VoidCallback onPressed;
   const ProfileDetail({
     super.key,
     required this.icon,
@@ -16,6 +17,7 @@ class ProfileDetail extends StatelessWidget {
     this.iconcolor,
     this.circlecolor,
     this.textcolor,
+    required this.onPressed,
   });
 
   @override
@@ -40,7 +42,7 @@ class ProfileDetail extends StatelessWidget {
             if (subtitle != null) ...[Text(subtitle ?? "")],
 
             SizedBox(width: 10),
-            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward_ios)),
+            IconButton(onPressed: onPressed, icon: Icon(Icons.arrow_forward_ios)),
           ],
         ),
       ],
