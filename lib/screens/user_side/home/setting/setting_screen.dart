@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/dropdown_row.dart';
 import 'package:shoppe/screens/user_side/home/setting/about_us_screen.dart';
 import 'package:shoppe/screens/user_side/home/setting/add_card_screen.dart';
