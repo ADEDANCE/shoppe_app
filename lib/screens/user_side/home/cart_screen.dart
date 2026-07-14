@@ -285,7 +285,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                       ButtonWidget(
                         text: "Checkout",
-                        onPressed: () {
+                        onPressed: () async {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (_) => PaymentScreen()),

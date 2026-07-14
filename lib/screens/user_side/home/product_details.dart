@@ -42,6 +42,8 @@ class _ProductDetailsState extends State<ProductDetails> {
 
       if (doc.exists) {
         await cartRef.update({"quantity": FieldValue.increment(1)});
+        if (!mounted) return;
+        Navigator.pop(context);
       } else {
         await cartRef.set({
           ...product,
