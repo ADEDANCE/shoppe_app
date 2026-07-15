@@ -6,7 +6,8 @@ import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/info_container.dart';
 import 'package:shoppe/screens/common_widgets/product_card.dart';
 import 'package:shoppe/screens/common_widgets/quantity_button.dart';
-import 'package:shoppe/screens/user_side/home/payment_screen.dart';
+import 'package:shoppe/screens/user_side/home/check_oder.dart';
+import 'package:shoppe/screens/user_side/services/api_service.dart';
 import 'package:shoppe/screens/user_side/services/product_categories.dart';
 
 class CartScreen extends StatefulWidget {
@@ -168,7 +169,7 @@ class _CartScreenState extends State<CartScreen> {
                                           Align(
                                             alignment: Alignment.centerLeft,
                                             child: Text(
-                                              "\$${cart[index]['price']}",
+                                              "₦${cart[index]['price']}",
                                               style: TextStyle(
                                                 fontSize: 20.sp,
                                                 fontWeight: FontWeight.bold,
@@ -275,7 +276,7 @@ class _CartScreenState extends State<CartScreen> {
                           ),
                           SizedBox(width: 8.w),
                           Text(
-                            "\$${totalPrice.toStringAsFixed(2)}",
+                            "₦${totalPrice.toStringAsFixed(2)}",
                             style: TextStyle(
                               fontSize: 20.sp,
                               fontWeight: FontWeight.bold,
@@ -286,10 +287,40 @@ class _CartScreenState extends State<CartScreen> {
                       ButtonWidget(
                         text: "Checkout",
                         onPressed: () async {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => PaymentScreen()),
-                          );
+                          try {
+                            final api = ApiService();
+                            // Read the cart
+                            final items = cart.map((item) {
+                              return {
+                                "productId": item.id,
+                                "quantity": item["quantity"],
+                              };
+                            }).toList();
+
+                            // Call the API
+                            final order = await api.createOrder(
+                              userId: uid,
+                              items: items,
+                              total: totalPrice,
+                            );
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => CheckOder(
+                                  orderId: order["orderId"],
+                                  totalPrice: totalPrice,
+                                ),
+                              ),
+                            );
+                          } catch (error, stackTrace) {
+                            print(error);
+                            print(stackTrace);
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(error.toString())),
+                            );
+                          }
                         },
                         color: const Color(0xFF004CFF),
                         height: 40.h,
