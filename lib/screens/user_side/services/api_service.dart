@@ -29,6 +29,8 @@ class ApiService {
     }
   }
 
+
+
   Future<Map<String, dynamic>> createPayment({
     required String orderId,
     required String email,
@@ -53,4 +55,22 @@ class ApiService {
       throw Exception(data["message"] ?? "Failed to make payment");
     }
   }
+
+
+
+  Future<Map<String, dynamic>> verifyPayment({
+  required String transactionId,
+}) async {
+  final response = await http.get(
+    Uri.parse(
+      "$baseUrl/api/payment/verify?transactionId=$transactionId",
+    ),
+  );
+
+  if (response.statusCode != 200) {
+    throw Exception("Payment verification failed");
+  }
+
+  return jsonDecode(response.body);
+}
 }

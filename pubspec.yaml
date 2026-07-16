@@ -50,6 +50,7 @@ dependencies:
   flutter_native_splash: ^2.4.7
   flutter_launcher_icons: ^0.14.4
   url_launcher: ^6.3.0
+  app_links: ^7.0.0
 
 dev_dependencies:
   flutter_test:
