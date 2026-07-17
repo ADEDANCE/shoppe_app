@@ -10,6 +10,8 @@ import 'package:shoppe/screens/onbarding/login_screen.dart';
 import 'package:shoppe/screens/onbarding/recover_password.dart';
 import 'package:shoppe/screens/onbarding/resetpassword_screen.dart';
 import 'package:shoppe/screens/onbarding/start.dart';
+import 'dart:async';
+import 'package:app_links/app_links.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,10 +26,35 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late final AppLinks _appLinks;
+  StreamSubscription<Uri>? _linkSubscription;
+
+  // Initialize App Links
+  @override
+  void initState() {
+    super.initState();
+
+    _appLinks = AppLinks();
+
+    // Start listening
+    _linkSubscription = _appLinks.uriLinkStream.listen((Uri uri) {});
+  }
+
+  // Stop listening
+  @override
+  void dispose() {
+    _linkSubscription?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
