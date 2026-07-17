@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
-import 'package:shoppe/screens/common_widgets/delivery_type.dart';
 import 'package:shoppe/screens/common_widgets/loading_dailog.dart';
 import 'package:shoppe/screens/common_widgets/quantity_button.dart';
 import 'package:shoppe/screens/common_widgets/review_widget.dart';
@@ -143,13 +142,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: double.infinity, //  full screen width
-                          height: 500.h,
-                          child: Image.network(
-                            data["image"],
-                            //       fit: BoxFit.cover,
-                          ),
-                        ),
+  width: double.infinity,
+  child: Image.network(
+    data["image"],
+    fit: BoxFit.fitWidth,
+  ),
+),
                         Padding(
                           padding: EdgeInsets.symmetric(
                             vertical: 20.h,
@@ -163,6 +161,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 style: TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
+                                ),
+                              ),
+
+                              Text(
+                                data["name"],
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.normal,
                                 ),
                               ),
 
@@ -182,7 +188,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-
+                              SizedBox(height: 15.h),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -194,7 +200,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   //    _SelectableButton('XXL', 4),
                                 ],
                               ),
-                              SizedBox(height: 10),
+                              SizedBox(height: 35.h),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -206,6 +212,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -255,38 +262,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ),
                               SizedBox(height: 8.h),
                               Text(
-                                "Delivery",
-                                style: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              DeliveryType(
-                                isdeliverySelected: selecteddelivery == 0,
-                                onTap: () {
-                                  setState(() {
-                                    selecteddelivery = 0;
-                                  });
-                                },
-
-                                title: "Standard",
-                                duration: "5-7 days",
-                                price: "\$3,00",
-                              ),
-                              DeliveryType(
-                                isdeliverySelected: selecteddelivery == 1,
-                                onTap: () {
-                                  setState(() {
-                                    selecteddelivery = 1;
-                                  });
-                                },
-
-                                title: "Standard",
-                                duration: "1-2 days",
-                                price: "\$12,00",
-                              ),
-                              SizedBox(height: 8.h),
-                              Text(
                                 "Rating & Reviews",
                                 style: TextStyle(
                                   fontSize: 20.sp,
@@ -300,7 +275,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 height: 45,
                                 text: "View All Reviews",
                                 onPressed: () {},
-                                color: Color(0XFF004CFF),
+                                color: Color.fromARGB(255, 199, 216, 254),
                               ),
                               //   SizedBox(height: 25.h),
                             ],
@@ -347,7 +322,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     height: 60.h,
                     text: "Buy now",
                     onPressed: () {},
-                    color: Color(0XFF004CFF),
+                    color: Color.fromARGB(255, 199, 213, 246),
                   ),
                 ],
               ),
