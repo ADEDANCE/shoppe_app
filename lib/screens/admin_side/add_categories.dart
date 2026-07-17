@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/preview_image.dart';
 import 'package:shoppe/screens/common_widgets/textfield.dart';
-import 'dart:io';
+import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 //import 'dart:convert';
@@ -22,9 +22,9 @@ class _AddCategoriesState extends State<AddCategories> {
   final TextEditingController _namecontroller = TextEditingController();
   final TextEditingController _amountcontroller = TextEditingController();
   final ImagePicker _picker = ImagePicker();
-  List<File> _selectedImages = [];
+  List<XFile> _selectedImages = [];
   // send images to cloudinary and return url
-  Future<String> uploadToCloudinary(File image) async {
+  Future<String> uploadToCloudinary(XFile image) async {
     // Cloudinary upload endpoint
     final url = Uri.parse(
       "https://api.cloudinary.com/v1_1/dbiiblk01/image/upload",
@@ -34,7 +34,11 @@ class _AddCategoriesState extends State<AddCategories> {
     //permission to upload without login
     request.fields["upload_preset"] = "shopee";
 
-    request.files.add(await http.MultipartFile.fromPath("file", image.path));
+    Uint8List bytes = await image.readAsBytes();
+
+    request.files.add(
+      http.MultipartFile.fromBytes("file", bytes, filename: image.name),
+    );
 
     var response = await request.send();
     //Converts server response into readable text
@@ -48,7 +52,7 @@ class _AddCategoriesState extends State<AddCategories> {
   Future<List<String>> uploadAllImages() async {
     List<String> urls = [];
     //Loops through each selected image
-    for (File image in _selectedImages) {
+    for (XFile image in _selectedImages) {
       String url = await uploadToCloudinary(image);
       urls.add(url);
     }
@@ -103,10 +107,7 @@ class _AddCategoriesState extends State<AddCategories> {
 
     if (images.isNotEmpty) {
       setState(() {
-        _selectedImages = images
-            .take(4) // limit to 4 images
-            .map((x) => File(x.path))
-            .toList();
+        _selectedImages = images.take(4).toList();
       });
     }
   }
@@ -131,6 +132,38 @@ class _AddCategoriesState extends State<AddCategories> {
 
   void hideLoadingDialog() {
     Navigator.of(context).pop();
+  }
+
+  // reusable image preview widget
+  Widget previewSelectedImage(int index) {
+    if (_selectedImages.length <= index) {
+      return const Icon(Icons.image_outlined);
+    }
+
+    XFile image = _selectedImages[index];
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: FutureBuilder<Uint8List>(
+        future: image.readAsBytes(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          }
+
+          if (!snapshot.hasData) {
+            return const Icon(Icons.error);
+          }
+
+          return Image.memory(
+            snapshot.data!,
+            width: 120,
+            height: 120,
+            fit: BoxFit.cover,
+          );
+        },
+      ),
+    );
   }
 
   @override
@@ -201,75 +234,30 @@ class _AddCategoriesState extends State<AddCategories> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                PreviewImage(
-                                  // ignore: prefer_is_empty
-                                  child: _selectedImages.length > 0
-                                      ? ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                            16,
-                                          ),
-                                          child: Image.file(
-                                            _selectedImages[0],
-                                            width: 120,
-                                            height: 120,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        )
-                                      : Icon(Icons.image_outlined),
-                                ),
+                                PreviewImage(child: previewSelectedImage(0)),
                                 SizedBox(width: 8),
-                                PreviewImage(
-                                  child: _selectedImages.length > 1
-                                      ? ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                            16,
-                                          ),
-                                          child: Image.file(
-                                            _selectedImages[1],
-                                            width: 120,
-                                            height: 120,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        )
-                                      : Icon(Icons.image_outlined),
-                                ),
+                                // PreviewImage(
+                                //   child: _selectedImages.length > 1
+                                //       ? ClipRRect(
+                                //           borderRadius: BorderRadius.circular(
+                                //             16,
+                                //           ),
+                                //           child: PreviewImage(
+                                //             child: previewSelectedImage(1),
+                                //           ),
+                                //         )
+                                //       : Icon(Icons.image_outlined),
+                                // ),
+                                PreviewImage(child: previewSelectedImage(1)),
                               ],
                             ),
                             SizedBox(height: 10.h),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                PreviewImage(
-                                  child: _selectedImages.length > 2
-                                      ? ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                            16,
-                                          ),
-                                          child: Image.file(
-                                            _selectedImages[2],
-                                            width: 120,
-                                            height: 120,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        )
-                                      : Icon(Icons.image_outlined),
-                                ),
+                                PreviewImage(child: previewSelectedImage(2)),
                                 SizedBox(width: 8),
-                                PreviewImage(
-                                  child: _selectedImages.length > 3
-                                      ? ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                            16,
-                                          ),
-                                          child: Image.file(
-                                            _selectedImages[3],
-                                            width: 120,
-                                            height: 120,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        )
-                                      : Icon(Icons.image_outlined),
-                                ),
+                                PreviewImage(child: previewSelectedImage(3)),
                               ],
                             ),
                           ],
