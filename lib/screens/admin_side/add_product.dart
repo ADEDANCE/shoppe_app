@@ -1,12 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
-import 'package:shoppe/screens/common_widgets/preview_image.dart';
 import 'package:shoppe/screens/common_widgets/textfield.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,7 +22,7 @@ class _AddProductState extends State<AddProduct> {
   final TextEditingController _categorycontroller = TextEditingController();
   final TextEditingController _descriptioncontroller = TextEditingController();
   final ImagePicker _picker = ImagePicker();
-  File? _selectedImage;
+  XFile? _selectedImage;
   String? selectedValue;
 
   final List<String> options = ["Clothing", "Bag", "Shoe"];
@@ -41,7 +40,7 @@ class _AddProductState extends State<AddProduct> {
     return keywords;
   }
 
-  Future<String> uploadToCloudinary(File image) async {
+  Future<String> uploadToCloudinary(XFile image) async {
     // Cloudinary upload endpoint
     final url = Uri.parse(
       "https://api.cloudinary.com/v1_1/dbiiblk01/image/upload",
@@ -50,7 +49,12 @@ class _AddProductState extends State<AddProduct> {
     //permission to upload without login
     request.fields["upload_preset"] = "shopee";
 
-    request.files.add(await http.MultipartFile.fromPath("file", image.path));
+    Uint8List bytes = await image.readAsBytes();
+
+    request.files.add(
+      http.MultipartFile.fromBytes("file", bytes, filename: image.name),
+    );
+
     var response = await request.send();
     //Converts server response into readable text
     var responseData = await response.stream.bytesToString();
@@ -132,7 +136,7 @@ class _AddProductState extends State<AddProduct> {
 
     if (image != null) {
       setState(() {
-        _selectedImage = File(image.path);
+        _selectedImage = image;
       });
     }
   }
@@ -220,11 +224,28 @@ class _AddProductState extends State<AddProduct> {
 
                       GestureDetector(
                         onTap: pickImage,
-                        child: PreviewImage(
-                          child: _selectedImage == null
-                              ? Icon(Icons.image_outlined)
-                              : Image.file(_selectedImage!),
-                        ),
+                        child: _selectedImage == null
+                            ? const Icon(Icons.image_outlined)
+                            : FutureBuilder<Uint8List>(
+                                future: _selectedImage!.readAsBytes(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const CircularProgressIndicator();
+                                  }
+
+                                  if (!snapshot.hasData) {
+                                    return const Icon(Icons.error);
+                                  }
+
+                                  return Image.memory(
+                                    snapshot.data!,
+                                    width: 120,
+                                    height: 120,
+                                    fit: BoxFit.cover,
+                                  );
+                                },
+                              ),
                       ),
                       SizedBox(height: 30.h),
                       TextField(

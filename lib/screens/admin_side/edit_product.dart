@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -32,18 +32,30 @@ class _EditProductState extends State<EditProduct> {
   late TextEditingController nameController;
   late TextEditingController amountController;
   late String currentImage; // store current image URLs
-  File? _selectedImage;
+  XFile? _selectedImage;
 
   Widget buildImagePreview() {
     if (_selectedImage != null) {
-      // show new picked local image
       return ClipRRect(
         borderRadius: BorderRadius.circular(16),
-        child: Image.file(
-          _selectedImage!,
-          width: 120,
-          height: 120,
-          fit: BoxFit.cover,
+        child: FutureBuilder<Uint8List>(
+          future: _selectedImage!.readAsBytes(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            }
+
+            if (!snapshot.hasData) {
+              return const Icon(Icons.error);
+            }
+
+            return Image.memory(
+              snapshot.data!,
+              width: 120,
+              height: 120,
+              fit: BoxFit.cover,
+            );
+          },
         ),
       );
     } else if (currentImage.isNotEmpty) {
@@ -62,7 +74,7 @@ class _EditProductState extends State<EditProduct> {
     }
   }
 
-  Future<String> uploadToCloudinary(File image) async {
+  Future<String> uploadToCloudinary(XFile image) async {
     // Cloudinary upload endpoint
     final url = Uri.parse(
       "https://api.cloudinary.com/v1_1/dbiiblk01/image/upload",
@@ -71,7 +83,12 @@ class _EditProductState extends State<EditProduct> {
     //permission to upload without login
     request.fields["upload_preset"] = "shopee";
 
-    request.files.add(await http.MultipartFile.fromPath("file", image.path));
+    Uint8List bytes = await image.readAsBytes();
+
+    request.files.add(
+      http.MultipartFile.fromBytes("file", bytes, filename: image.name),
+    );
+
     var response = await request.send();
     //Converts server response into readable text
     var responseData = await response.stream.bytesToString();
@@ -134,7 +151,7 @@ class _EditProductState extends State<EditProduct> {
 
     if (image != null) {
       setState(() {
-        _selectedImage = File(image.path);
+        _selectedImage = image;
       });
     }
   }
