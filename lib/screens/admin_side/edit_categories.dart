@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/common_widgets/preview_image.dart';
-import 'dart:io';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:shoppe/screens/common_widgets/textfield.dart';
 
@@ -29,22 +29,35 @@ class _EditCategoriesState extends State<EditCategories> {
   late TextEditingController nameController;
   late TextEditingController amountController;
   late List<String> currentImages; // store current image URLs
-  List<File> _selectedImages = [];
+  List<XFile> _selectedImages = [];
 
   Widget buildImagePreview(int index) {
     if (_selectedImages.length > index) {
-      // show new picked local image
       return ClipRRect(
         borderRadius: BorderRadius.circular(16),
-        child: Image.file(
-          _selectedImages[index],
-          width: 120,
-          height: 120,
-          fit: BoxFit.cover,
+        child: FutureBuilder(
+          future: _selectedImages[index].readAsBytes(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            }
+
+            if (!snapshot.hasData) {
+              return const Icon(Icons.error);
+            }
+
+            return Image.memory(
+              snapshot.data!,
+              width: 120,
+              height: 120,
+              fit: BoxFit.cover,
+            );
+          },
         ),
       );
-    } else if (currentImages.length > index) {
-      // show existing network image
+    }
+
+    if (currentImages.length > index) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: Image.network(
@@ -54,9 +67,9 @@ class _EditCategoriesState extends State<EditCategories> {
           fit: BoxFit.cover,
         ),
       );
-    } else {
-      return Icon(Icons.image_outlined);
     }
+
+    return const Icon(Icons.image_outlined);
   }
 
   Future<void> updateCategory() async {
@@ -95,7 +108,6 @@ class _EditCategoriesState extends State<EditCategories> {
       setState(() {
         _selectedImages = images
             .take(4) // limit to 4 images
-            .map((x) => File(x.path))
             .toList();
       });
     }
