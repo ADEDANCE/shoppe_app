@@ -12,6 +12,7 @@ import 'package:shoppe/screens/onbarding/resetpassword_screen.dart';
 import 'package:shoppe/screens/onbarding/start.dart';
 import 'dart:async';
 import 'package:app_links/app_links.dart';
+import 'package:shoppe/screens/user_side/home/ordertracking_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +35,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+
   late final AppLinks _appLinks;
   StreamSubscription<Uri>? _linkSubscription;
 
@@ -44,8 +47,14 @@ class _MyAppState extends State<MyApp> {
 
     _appLinks = AppLinks();
 
-    // Start listening
-    _linkSubscription = _appLinks.uriLinkStream.listen((Uri uri) {});
+    _linkSubscription = _appLinks.uriLinkStream.listen((Uri uri) {
+      if (uri.scheme == "shoppe" && uri.host == "payment-success") {
+        _navigatorKey.currentState?.pushAndRemoveUntil(
+          MaterialPageRoute(builder: (_) => const OrdertrackingScreen()),
+          (route) => false,
+        );
+      }
+    });
   }
 
   // Stop listening
@@ -58,6 +67,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: _navigatorKey,
       title: 'shopee',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
