@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shoppe/screens/user_side/home/cart_screen.dart';
 import 'package:shoppe/screens/user_side/home/home_screen.dart';
 import 'package:shoppe/screens/user_side/home/profile_screen.dart';
-import 'package:shoppe/screens/user_side/home/wishlist_screen.dart';
 
 class HomeNav extends StatefulWidget {
   const HomeNav({super.key});
@@ -15,7 +14,7 @@ class _HomeNavState extends State<HomeNav> {
   int _currentIndex = 0;
   final List<Widget> _pages = const [
     HomeScreen(),
-    WishlistScreen(),
+    // WishlistScreen(),
     CartScreen(),
     ProfileScreen(),
   ];
@@ -49,22 +48,22 @@ class _HomeNavState extends State<HomeNav> {
             ),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Column(
-              children: [
-                Icon(Icons.favorite_outline),
-                _currentIndex == 1
-                    ? Container(width: 20, height: 2, color: Colors.blue)
-                    : SizedBox.shrink(),
-              ],
-            ),
-            label: 'Search',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Column(
+          //     children: [
+          //       Icon(Icons.favorite_outline),
+          //       _currentIndex == 1
+          //           ? Container(width: 20, height: 2, color: Colors.blue)
+          //           : SizedBox.shrink(),
+          //     ],
+          //   ),
+          //   label: 'Search',
+          // ),
           BottomNavigationBarItem(
             icon: Column(
               children: [
                 Icon(Icons.shopping_cart),
-                _currentIndex == 2
+                _currentIndex == 1
                     ? Container(width: 20, height: 2, color: Colors.blue)
                     : SizedBox.shrink(),
               ],
@@ -75,7 +74,7 @@ class _HomeNavState extends State<HomeNav> {
             icon: Column(
               children: [
                 Icon(Icons.person),
-                _currentIndex == 3
+                _currentIndex == 2
                     ? Container(width: 20, height: 2, color: Colors.blue)
                     : SizedBox.shrink(),
               ],
