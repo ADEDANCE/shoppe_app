@@ -6,6 +6,9 @@ import 'package:shoppe/screens/common_widgets/preview_image.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:shoppe/screens/common_widgets/textfield.dart';
+import 'dart:convert';
+import 'dart:typed_data';
+import 'package:http/http.dart' as http;
 
 class EditCategories extends StatefulWidget {
   final String docId; // Firestore document ID
@@ -20,6 +23,7 @@ class EditCategories extends StatefulWidget {
     required this.images,
   });
 
+
   @override
   State<EditCategories> createState() => _EditCategoriesState();
 }
@@ -30,6 +34,49 @@ class _EditCategoriesState extends State<EditCategories> {
   late TextEditingController amountController;
   late List<String> currentImages; // store current image URLs
   List<XFile> _selectedImages = [];
+
+   Future<String> uploadToCloudinary(XFile image) async {
+  final url = Uri.parse(
+    "https://api.cloudinary.com/v1_1/dbiiblk01/image/upload",
+  );
+
+  var request = http.MultipartRequest(
+    "POST",
+    url,
+  );
+
+  request.fields["upload_preset"] = "shopee";
+
+  Uint8List bytes = await image.readAsBytes();
+
+  request.files.add(
+    http.MultipartFile.fromBytes(
+      "file",
+      bytes,
+      filename: image.name,
+    ),
+  );
+
+  var response = await request.send();
+
+  var responseData = await response.stream.bytesToString();
+
+  final jsonData = jsonDecode(responseData);
+
+  return jsonData["secure_url"];
+}
+
+
+Future<List<String>> uploadAllImages() async {
+  List<String> urls = [];
+
+  for (XFile image in _selectedImages) {
+    String url = await uploadToCloudinary(image);
+    urls.add(url);
+  }
+
+  return urls;
+}
 
   Widget buildImagePreview(int index) {
     if (_selectedImages.length > index) {
@@ -73,33 +120,50 @@ class _EditCategoriesState extends State<EditCategories> {
   }
 
   Future<void> updateCategory() async {
-    try {
-      // If you allow changing images, upload new images to Cloudinary first
-      List<String> imageUrls =
-          currentImages; // use updated list if new images are picked
+  try {
 
-      await FirebaseFirestore.instance
-          .collection("categories")
-          .doc(widget.docId)
-          .update({
-            "name": nameController.text,
-            "amount": int.parse(amountController.text),
-            "images": imageUrls,
-            "updatedAt": Timestamp.now(),
-          });
-      if (!mounted) return;
+    List<String> imageUrls = currentImages;
 
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Category updated")));
-
-      Navigator.pop(context); // go back to admin dashboard
-    } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Error updating category: $e")));
+    // If new images were selected, upload them
+    if (_selectedImages.isNotEmpty) {
+      imageUrls = await uploadAllImages();
     }
+
+
+    await FirebaseFirestore.instance
+        .collection("categories")
+        .doc(widget.docId)
+        .update({
+          "name": nameController.text,
+          "amount": int.parse(
+            amountController.text.replaceAll(",", ""),
+          ),
+          "images": imageUrls,
+          "updatedAt": Timestamp.now(),
+        });
+
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Category updated"),
+      ),
+    );
+
+
+    Navigator.pop(context);
+
+  } catch (e) {
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Error updating category: $e"),
+      ),
+    );
+
   }
+}
 
   Future<void> pickImage() async {
     final List<XFile> images = await _picker.pickMultiImage();
