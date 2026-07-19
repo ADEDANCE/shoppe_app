@@ -35,7 +35,7 @@ class _StartState extends State<Start> {
                       ),
                     ),
                     Text(
-                      "Beautiful eCommerce UI \nKit for your online store",
+                      "Smart Shopping Starts Here.",
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
