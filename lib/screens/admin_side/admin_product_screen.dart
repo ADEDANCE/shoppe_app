@@ -6,6 +6,7 @@ import 'package:shoppe/screens/admin_side/edit_product.dart';
 import 'package:shoppe/screens/common_widgets/admin_card.dart';
 import 'package:shoppe/screens/common_widgets/button_widget.dart';
 import 'package:shoppe/screens/user_side/services/product_categories.dart';
+import 'package:intl/intl.dart';
 
 class AdminProductScreen extends StatefulWidget {
   const AdminProductScreen({super.key});
@@ -16,6 +17,11 @@ class AdminProductScreen extends StatefulWidget {
 
 class _AdminProductScreenState extends State<AdminProductScreen> {
   final FirestoreService service = FirestoreService();
+  final formatter = NumberFormat.currency(
+    locale: 'en_NG',
+    symbol: '₦',
+    decimalDigits: 0,
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +61,7 @@ class _AdminProductScreenState extends State<AdminProductScreen> {
                               imagepath: product["image"],
                               title: product["name"],
                               price: Color(0xFF004CFF),
-                              amount: product["price"].toString(),
+                              amount: formatter.format(product["price"]),
                               category: product["category"],
                               onTap: () {},
                               editicon: Icon(Icons.edit_outlined),
