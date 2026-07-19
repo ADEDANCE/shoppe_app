@@ -101,7 +101,7 @@ class _AddProductState extends State<AddProduct> {
       String imageUrl = await uploadToCloudinary(_selectedImage!);
       await FirebaseFirestore.instance.collection("products").add({
         "name": _namecontroller.text,
-        "price": int.parse(_amountcontroller.text),
+        "price": int.parse(_amountcontroller.text.replaceAll(',', '')),
         "category": _categorycontroller.text,
         "description": _descriptioncontroller.text,
         "image": imageUrl,
