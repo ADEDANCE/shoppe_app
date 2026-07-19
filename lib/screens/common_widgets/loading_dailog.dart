@@ -10,7 +10,7 @@ void showLoadingDialog(BuildContext context) {
           children: [
             CircularProgressIndicator(),
             SizedBox(width: 20),
-            Text("Uploading..."),
+            Text("loading..."),
           ],
         ),
       );
