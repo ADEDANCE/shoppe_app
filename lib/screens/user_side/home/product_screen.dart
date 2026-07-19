@@ -83,6 +83,15 @@ class ProductScreen extends StatelessWidget {
                               ProducrCard(
                                 width: 190.w,
                                 onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => ProductDetails(
+                                        productId:
+                                            categoryProducts[secondIndex].id,
+                                      ),
+                                    ),
+                                  );
                                   // Navigator.push(
                                   //   context,
                                   //   MaterialPageRoute(
