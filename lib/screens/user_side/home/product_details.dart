@@ -7,6 +7,7 @@ import 'package:shoppe/screens/common_widgets/loading_dailog.dart';
 import 'package:shoppe/screens/common_widgets/quantity_button.dart';
 import 'package:shoppe/screens/common_widgets/review_widget.dart';
 import 'package:shoppe/screens/user_side/services/product_categories.dart';
+import 'package:intl/intl.dart';
 
 int selectedIndex = 1;
 int quantity = 1;
@@ -25,6 +26,12 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   final FirestoreService service = FirestoreService();
+
+  final nairaFormatter = NumberFormat.currency(
+    locale: 'en_NG',
+    symbol: '₦',
+    decimalDigits: 0,
+  );
 
   Future<void> addToCart(String productId, Map<String, dynamic> product) async {
     try {
@@ -142,12 +149,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-  width: double.infinity,
-  child: Image.network(
-    data["image"],
-    fit: BoxFit.fitWidth,
-  ),
-),
+                          width: double.infinity,
+                          child: Image.network(
+                            data["image"],
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ),
                         Padding(
                           padding: EdgeInsets.symmetric(
                             vertical: 20.h,
@@ -157,18 +164,18 @@ class _ProductDetailsState extends State<ProductDetails> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "\$${data["price"]}",
-                                style: TextStyle(
+                                nairaFormatter.format(data["price"]),
+                                style: const TextStyle(
                                   fontSize: 24,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w700,
                                 ),
                               ),
 
                               Text(
                                 data["name"],
                                 style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.normal,
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
 
