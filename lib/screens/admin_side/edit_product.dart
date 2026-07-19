@@ -125,7 +125,7 @@ class _EditProductState extends State<EditProduct> {
           .doc(widget.docId)
           .update({
             "name": nameController.text,
-            "price": int.parse(amountController.text),
+            "price": int.parse(amountController.text.replaceAll(',', '')),
             "image": imageUrl,
             "keywords": buildSearchKeywords(nameController.text),
 
